@@ -2,36 +2,70 @@
 
 import { FormEvent, useState } from "react";
 
+const services = [
+  "Website / Digital Experience",
+  "E-commerce",
+  "Online Ordering",
+  "Automation",
+  "CRM / Lead System",
+  "Custom Software",
+  "SEO / Digital Growth",
+  "Other",
+];
+
+const budgets = [
+  "Under $1,000",
+  "$1,000 – $2,500",
+  "$2,500 – $5,000",
+  "$5,000 – $10,000",
+  "$10,000+",
+  "Not sure yet",
+];
+
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{
-    type: "success" | "error" | "";
+    type: "success" | "error" | null;
     message: string;
   }>({
-    type: "",
+    type: null,
     message: "",
   });
+
+  const [formData, setFormData] = useState({
+    name: "",
+    businessName: "",
+    email: "",
+    phone: "",
+    website: "",
+    country: "",
+    service: "",
+    projectDetails: "",
+    budget: "",
+  });
+
+  function handleChange(
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) {
+    const { name, value } = event.target;
+
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setIsSubmitting(true);
-    setStatus({ type: "", message: "" });
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    const payload = {
-      name: String(formData.get("name") || "").trim(),
-      businessName: String(formData.get("businessName") || "").trim(),
-      email: String(formData.get("email") || "").trim(),
-      phone: String(formData.get("phone") || "").trim(),
-      website: String(formData.get("website") || "").trim(),
-      country: String(formData.get("country") || "").trim(),
-      service: String(formData.get("service") || "").trim(),
-      projectDetails: String(formData.get("projectDetails") || "").trim(),
-      budget: String(formData.get("budget") || "").trim(),
-    };
+    setStatus({
+      type: null,
+      message: "",
+    });
 
     try {
       const response = await fetch("/api/contact", {
@@ -39,26 +73,14 @@ export default function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(formData),
       });
 
-      const rawResponse = await response.text();
+      const result = await response.json();
 
-      let result: {
-        success?: boolean;
-        message?: string;
-      } = {};
-
-      try {
-        result = rawResponse ? JSON.parse(rawResponse) : {};
-      } catch {
-        result = {};
-      }
-
-      if (!response.ok || result.success === false) {
+      if (!response.ok || !result.success) {
         throw new Error(
-          result.message ||
-            "We couldn't send your inquiry. Please try again."
+          result.message || "Something went wrong. Please try again."
         );
       }
 
@@ -68,10 +90,18 @@ export default function ContactForm() {
           "Thank you. Your project inquiry has been sent successfully. We'll be in touch shortly.",
       });
 
-      form.reset();
+      setFormData({
+        name: "",
+        businessName: "",
+        email: "",
+        phone: "",
+        website: "",
+        country: "",
+        service: "",
+        projectDetails: "",
+        budget: "",
+      });
     } catch (error) {
-      console.error("Contact form error:", error);
-
       setStatus({
         type: "error",
         message:
@@ -84,189 +114,282 @@ export default function ContactForm() {
     }
   }
 
-  const inputClass =
-    "w-full rounded-xl border border-black/10 bg-black/[0.03] px-4 py-3.5 text-[#101827] outline-none transition placeholder:text-black/35 focus:border-black/30 focus:bg-black/[0.05]";
+  const inputClassName =
+    "mt-3 w-full rounded-2xl border border-black/10 bg-white px-5 py-5 text-base text-[#071528] outline-none transition placeholder:text-black/30 focus:border-black/30 focus:ring-2 focus:ring-black/[0.04]";
 
-  const labelClass = "mb-2 block text-sm font-medium text-[#101827]";
+  const labelClassName =
+    "text-[11px] font-bold tracking-[0.08em] text-[#071528]";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-2">
-        <div>
-          <label htmlFor="name" className={labelClass}>
-            Name *
-          </label>
+    <section
+      id="contact"
+      className="border-t border-black/10 bg-[#f7f8f5]"
+    >
+      <div className="mx-auto w-full max-w-[1500px] px-5 py-24 sm:px-8 sm:py-28 lg:px-10 lg:py-40">
+        <div className="grid gap-14 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
+          {/* LEFT SIDE */}
+          <div>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-black/30">
+              START A PROJECT
+            </p>
 
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            placeholder="Your name"
-            className={inputClass}
-          />
-        </div>
+            <h2 className="mt-7 max-w-xl text-5xl font-medium leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+              Let's build something that{" "}
+              <span className="text-black/20">moves.</span>
+            </h2>
 
-        <div>
-          <label htmlFor="businessName" className={labelClass}>
-            Business Name *
-          </label>
+            <p className="mt-8 max-w-md text-base leading-7 text-black/50">
+              Tell us about your business, what you want to build, and where
+              you want to go. We'll look at the opportunity and get back to
+              you.
+            </p>
 
-          <input
-            id="businessName"
-            name="businessName"
-            type="text"
-            required
-            placeholder="Your business"
-            className={inputClass}
-          />
-        </div>
+            <div className="mt-12 space-y-5 border-t border-black/10 pt-8">
+              <div>
+                <p className="text-[9px] font-bold tracking-[0.2em] text-black/30">
+                  BUSINESS MOTION LABS
+                </p>
 
-        <div>
-          <label htmlFor="email" className={labelClass}>
-            Email *
-          </label>
+                <p className="mt-2 text-sm text-black/55">
+                  Digital technology / Growth / Systems
+                </p>
+              </div>
 
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            placeholder="you@company.com"
-            className={inputClass}
-          />
-        </div>
+              <div>
+                <p className="text-[9px] font-bold tracking-[0.2em] text-black/30">
+                  RESPONSE
+                </p>
 
-        <div>
-          <label htmlFor="phone" className={labelClass}>
-            Phone
-          </label>
+                <p className="mt-2 text-sm text-black/55">
+                  We'll review your inquiry and get back to you shortly.
+                </p>
+              </div>
+            </div>
+          </div>
 
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            placeholder="+1 555 123 4567"
-            className={inputClass}
-          />
-        </div>
+          {/* FORM */}
+          <div className="w-full">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full rounded-[28px] border border-black/10 bg-white p-5 shadow-sm sm:p-8 lg:p-10"
+            >
+              <div className="space-y-6">
+                {/* NAME + BUSINESS */}
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="name" className={labelClassName}>
+                      Name *
+                    </label>
 
-        <div>
-          <label htmlFor="website" className={labelClass}>
-            Current Website
-          </label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      className={inputClassName}
+                    />
+                  </div>
 
-          <input
-            id="website"
-            name="website"
-            type="url"
-            placeholder="https://yourbusiness.com"
-            className={inputClass}
-          />
-        </div>
+                  <div>
+                    <label
+                      htmlFor="businessName"
+                      className={labelClassName}
+                    >
+                      Business Name *
+                    </label>
 
-        <div>
-          <label htmlFor="country" className={labelClass}>
-            Country
-          </label>
+                    <input
+                      id="businessName"
+                      name="businessName"
+                      type="text"
+                      required
+                      value={formData.businessName}
+                      onChange={handleChange}
+                      placeholder="Your business"
+                      className={inputClassName}
+                    />
+                  </div>
+                </div>
 
-          <input
-            id="country"
-            name="country"
-            type="text"
-            placeholder="United States"
-            className={inputClass}
-          />
+                {/* EMAIL + PHONE */}
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="email" className={labelClassName}>
+                      Email *
+                    </label>
+
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="you@company.com"
+                      className={inputClassName}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="phone" className={labelClassName}>
+                      Phone
+                    </label>
+
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+1 555 123 4567"
+                      className={inputClassName}
+                    />
+                  </div>
+                </div>
+
+                {/* WEBSITE + COUNTRY */}
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="website" className={labelClassName}>
+                      Current Website
+                    </label>
+
+                    <input
+                      id="website"
+                      name="website"
+                      type="url"
+                      value={formData.website}
+                      onChange={handleChange}
+                      placeholder="https://yourbusiness.com"
+                      className={inputClassName}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="country" className={labelClassName}>
+                      Country
+                    </label>
+
+                    <input
+                      id="country"
+                      name="country"
+                      type="text"
+                      value={formData.country}
+                      onChange={handleChange}
+                      placeholder="United States"
+                      className={inputClassName}
+                    />
+                  </div>
+                </div>
+
+                {/* SERVICE */}
+                <div>
+                  <label htmlFor="service" className={labelClassName}>
+                    What do you need help with? *
+                  </label>
+
+                  <select
+                    id="service"
+                    name="service"
+                    required
+                    value={formData.service}
+                    onChange={handleChange}
+                    className={`${inputClassName} appearance-auto`}
+                  >
+                    <option value="" disabled>
+                      Select a service
+                    </option>
+
+                    {services.map((service) => (
+                      <option key={service} value={service}>
+                        {service}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* PROJECT DETAILS */}
+                <div>
+                  <label
+                    htmlFor="projectDetails"
+                    className={labelClassName}
+                  >
+                    Tell us about your project *
+                  </label>
+
+                  <textarea
+                    id="projectDetails"
+                    name="projectDetails"
+                    required
+                    rows={7}
+                    value={formData.projectDetails}
+                    onChange={handleChange}
+                    placeholder="Tell us about your business, what you want to build, what problem you're trying to solve, and anything else we should know."
+                    className={`${inputClassName} resize-y`}
+                  />
+                </div>
+
+                {/* BUDGET */}
+                <div>
+                  <label htmlFor="budget" className={labelClassName}>
+                    Estimated Budget
+                  </label>
+
+                  <select
+                    id="budget"
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleChange}
+                    className={`${inputClassName} appearance-auto`}
+                  >
+                    <option value="">
+                      Select an approximate budget
+                    </option>
+
+                    {budgets.map((budget) => (
+                      <option key={budget} value={budget}>
+                        {budget}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* STATUS MESSAGE */}
+                {status.type && (
+                  <div
+                    className={`rounded-2xl border px-5 py-4 text-sm leading-6 ${
+                      status.type === "success"
+                        ? "border-green-200 bg-green-50 text-green-800"
+                        : "border-red-200 bg-red-50 text-red-800"
+                    }`}
+                  >
+                    {status.message}
+                  </div>
+                )}
+
+                {/* SUBMIT */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-[#071528] px-6 py-5 text-sm font-semibold tracking-wide text-white transition hover:bg-[#12335d] disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isSubmitting
+                    ? "Sending Inquiry..."
+                    : "Send Project Inquiry"}
+                </button>
+
+                <p className="text-center text-[10px] leading-5 text-black/35">
+                  By submitting this form, you agree to be contacted regarding
+                  your project inquiry.
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-
-      <div>
-        <label htmlFor="service" className={labelClass}>
-          What do you need help with? *
-        </label>
-
-        <select
-          id="service"
-          name="service"
-          required
-          defaultValue=""
-          className={inputClass}
-        >
-          <option value="" disabled>
-            Select a service
-          </option>
-          <option value="Website">Website</option>
-          <option value="E-commerce">E-commerce</option>
-          <option value="Online Ordering">Online Ordering</option>
-          <option value="Automation">Automation</option>
-          <option value="CRM / Lead System">CRM / Lead System</option>
-          <option value="Custom Software">Custom Software</option>
-          <option value="SEO / Digital Growth">
-            SEO / Digital Growth
-          </option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="projectDetails" className={labelClass}>
-          Tell us about your project *
-        </label>
-
-        <textarea
-          id="projectDetails"
-          name="projectDetails"
-          required
-          rows={6}
-          placeholder="Tell us about your business, what you want to build, and what you're trying to achieve."
-          className={`${inputClass} resize-none`}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="budget" className={labelClass}>
-          Estimated Budget
-        </label>
-
-        <select
-          id="budget"
-          name="budget"
-          defaultValue=""
-          className={inputClass}
-        >
-          <option value="">Select a budget range</option>
-          <option value="Under $1,000">Under $1,000</option>
-          <option value="$1,000 – $2,500">$1,000 – $2,500</option>
-          <option value="$2,500 – $5,000">$2,500 – $5,000</option>
-          <option value="$5,000 – $10,000">$5,000 – $10,000</option>
-          <option value="$10,000+">$10,000+</option>
-          <option value="Not sure yet">Not sure yet</option>
-        </select>
-      </div>
-
-      {status.message && (
-        <div
-          className={`rounded-xl border px-4 py-4 text-sm ${
-            status.type === "success"
-              ? "border-green-600/20 bg-green-50 text-green-800"
-              : "border-red-600/20 bg-red-50 text-red-800"
-          }`}
-        >
-          {status.message}
-        </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="inline-flex w-full items-center justify-center rounded-xl bg-[#101827] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#1a2538] disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {isSubmitting ? "Sending Inquiry..." : "Send Project Inquiry"}
-      </button>
-
-      <p className="text-center text-xs text-black/40">
-        Your information is only used to respond to your project inquiry.
-      </p>
-    </form>
+    </section>
   );
 }
