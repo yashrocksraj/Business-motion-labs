@@ -484,6 +484,14 @@ function AuditRoadmap() {
 export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
 
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    setMobileMenu(false);
+  };
+
   return (
     <main className="min-h-screen bg-[#f7f8f5] text-[#071528]">
       {/* NAVIGATION */}
@@ -542,12 +550,13 @@ export default function Home() {
             </nav>
 
             <div className="flex items-center gap-2">
-              <a
-                href="#contact"
+              <button
+                type="button"
+                onClick={scrollToContact}
                 className="rounded-full bg-[#071528] px-4 py-2.5 text-[9px] font-bold tracking-[0.12em] text-white transition hover:bg-[#12335d] sm:px-5 sm:text-[10px]"
               >
                 START A PROJECT
-              </a>
+              </button>
 
               <button
                 type="button"
@@ -886,7 +895,9 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <ContactForm />
+      <section id="contact" className="scroll-mt-28">
+        <ContactForm />
+      </section>
 
       {/* FOOTER */}
       <footer className="bg-[#071528] text-white">
