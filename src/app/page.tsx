@@ -481,8 +481,54 @@ function AuditRoadmap() {
   );
 }
 
+
+
+function PhotoPanel({
+  src,
+  alt,
+  eyebrow,
+  title,
+  className = "",
+}: {
+  src: string;
+  alt: string;
+  eyebrow: string;
+  title: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`group relative min-h-[360px] overflow-hidden rounded-[28px] bg-[#071528] ${className}`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover transition duration-1000 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#071528] via-[#071528]/30 to-black/5" />
+      <div className="relative flex h-full min-h-[360px] flex-col justify-between p-6 text-white sm:p-8">
+        <div className="flex items-center justify-between">
+          <span className="text-[9px] font-bold tracking-[0.22em] text-white/55">
+            {eyebrow}
+          </span>
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white/60 backdrop-blur">
+            ↗
+          </span>
+        </div>
+        <div>
+          <h3 className="max-w-xl text-3xl font-medium leading-[1] tracking-[-0.045em] sm:text-4xl">
+            {title}
+          </h3>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [activeApproach, setActiveApproach] = useState(0);
 
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({
@@ -492,61 +538,173 @@ export default function Home() {
     setMobileMenu(false);
   };
 
+  const approachVisuals = [
+    {
+      label: "01 / UNDERSTAND",
+      title: "Start with the business, not the template.",
+      description:
+        "We map goals, customers, technology, friction points and the moments that matter.",
+      chips: ["Goals", "Customers", "Technology", "Pain points"],
+    },
+    {
+      label: "02 / AUDIT",
+      title: "Find what is holding digital growth back.",
+      description:
+        "We examine the website, mobile experience, SEO, conversion journey, analytics and technology.",
+      chips: ["Performance", "Mobile UX", "SEO", "Conversion"],
+    },
+    {
+      label: "03 / OPPORTUNITY MAP",
+      title: "Turn problems into a clear priority list.",
+      description:
+        "We separate quick wins from high-impact opportunities and identify what deserves attention first.",
+      chips: ["Quick wins", "High impact", "Missed demand", "Priorities"],
+    },
+    {
+      label: "04 / ROADMAP",
+      title: "Know what should happen now, next and later.",
+      description:
+        "We create a practical roadmap tied to business goals instead of a collection of disconnected tasks.",
+      chips: ["Now", "Next", "Later", "Measure"],
+    },
+    {
+      label: "05 / BUILD",
+      title: "Connect the right technology.",
+      description:
+        "We design and develop the digital experience, applications, integrations and systems your business needs.",
+      chips: ["Experience", "Data", "Automation", "Integrations"],
+    },
+    {
+      label: "06 / OPTIMIZE",
+      title: "Keep improving the engine.",
+      description:
+        "After launch, performance data and customer behavior guide the next round of improvements.",
+      chips: ["Traffic", "Leads", "Conversion", "Retention"],
+    },
+  ];
+
+  const serviceVisuals = [
+    {
+      eyebrow: "DIGITAL EXPERIENCE",
+      title: "Discover → Explore → Trust → Convert",
+      className:
+        "bg-[linear-gradient(135deg,#0b1f3a_0%,#123b68_55%,#071528_100%)]",
+    },
+    {
+      eyebrow: "ORDERING SYSTEM",
+      title: "Menu → Cart → Payment → Confirmation",
+      className:
+        "bg-[linear-gradient(135deg,#071528_0%,#173b4f_55%,#0b1f3a_100%)]",
+    },
+    {
+      eyebrow: "SEARCH & GROWTH",
+      title: "Search → Traffic → Leads → Growth",
+      className:
+        "bg-[linear-gradient(135deg,#081a2d_0%,#163c5c_55%,#071528_100%)]",
+    },
+    {
+      eyebrow: "AUTOMATION",
+      title: "Trigger → Workflow → Notification → Action",
+      className:
+        "bg-[linear-gradient(135deg,#0b1f3a_0%,#243d5a_55%,#071528_100%)]",
+    },
+    {
+      eyebrow: "CUSTOM TECHNOLOGY",
+      title: "Interface → API → Data → Application",
+      className:
+        "bg-[linear-gradient(135deg,#071528_0%,#17365f_55%,#0b1f3a_100%)]",
+    },
+    {
+      eyebrow: "DIGITAL OPERATIONS",
+      title: "Customers → Systems → Insights → Decisions",
+      className:
+        "bg-[linear-gradient(135deg,#0a1b2e_0%,#16445a_55%,#071528_100%)]",
+    },
+  ];
+
+  const industries = [
+    {
+      title: "Restaurants & Hospitality",
+      detail: "Ordering, payments, booking, local discovery",
+      image:
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      title: "Fitness & Gyms",
+      detail: "Lead capture, booking, CRM, automation",
+      image:
+        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      title: "Local Businesses",
+      detail: "SEO, websites, enquiries, conversion",
+      image:
+        "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      title: "Professional Services",
+      detail: "Authority, lead generation, customer journeys",
+      image:
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      title: "E-commerce",
+      detail: "Storefronts, checkout, analytics, growth",
+      image:
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      title: "Growing Businesses",
+      detail: "Strategy, technology, systems, scale",
+      image:
+        "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=85",
+    },
+  ];
+
+  const process = [
+    ["01", "Design", "Turn strategy into a clear, premium digital experience."],
+    ["02", "Build", "Develop the website, application, integrations or systems."],
+    ["03", "Test", "QA across devices, journeys, forms, payments and functionality."],
+    ["04", "Launch", "Put the system in front of real customers."],
+    ["05", "Measure", "Track performance, behavior and business outcomes."],
+    ["06", "Improve", "Continuously optimize what we built."],
+  ];
+
   return (
-    <main className="min-h-screen bg-[#f7f8f5] text-[#071528]">
+    <main id="top" className="min-h-screen bg-[#f7f8f5] text-[#071528]">
       {/* NAVIGATION */}
       <header className="fixed left-0 right-0 top-0 z-50">
         <div className="mx-auto max-w-[1500px] px-4 py-4 sm:px-5 lg:px-8">
           <div className="relative flex items-center justify-between rounded-full border border-black/[0.08] bg-[#f7f8f5]/90 px-4 py-3 shadow-sm backdrop-blur-xl">
-            <a
-              href="#top"
-              onClick={() => setMobileMenu(false)}
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="flex items-center gap-3"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#071528] text-sm font-bold text-white">
                 B
               </div>
-
               <span className="text-[10px] font-bold tracking-[0.14em] sm:text-[11px] sm:tracking-[0.16em]">
                 BUSINESS MOTION LABS
               </span>
-            </a>
+            </button>
 
             <nav className="hidden items-center gap-7 md:flex">
-              <a
-                href="#approach"
-                className="text-xs text-black/45 transition hover:text-black"
-              >
-                Approach
-              </a>
-
-              <a
-                href="#services"
-                className="text-xs text-black/45 transition hover:text-black"
-              >
-                Services
-              </a>
-
-              <a
-                href="#work"
-                className="text-xs text-black/45 transition hover:text-black"
-              >
-                Work
-              </a>
-
-              <a
-                href="#process"
-                className="text-xs text-black/45 transition hover:text-black"
-              >
-                Process
-              </a>
-
-              <a
-                href="#about"
-                className="text-xs text-black/45 transition hover:text-black"
-              >
-                About
-              </a>
+              {[
+                ["Approach", "#approach"],
+                ["Services", "#services"],
+                ["Work", "#work"],
+                ["Process", "#process"],
+                ["About", "#about"],
+              ].map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="text-xs text-black/45 transition hover:text-black"
+                >
+                  {label}
+                </a>
+              ))}
             </nav>
 
             <div className="flex items-center gap-2">
@@ -596,20 +754,15 @@ export default function Home() {
       </header>
 
       {/* HERO */}
-      <section
-        id="top"
-        className="relative flex min-h-screen items-end overflow-hidden"
-      >
+      <section className="relative flex min-h-screen items-end overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute right-[-10%] top-[5%] h-[600px] w-[600px] rounded-full bg-blue-100/50 blur-3xl" />
-
           <div className="absolute bottom-[-15%] left-[-5%] h-[500px] w-[500px] rounded-full bg-slate-100 blur-3xl" />
-
           <div className="absolute inset-0 opacity-[0.035] [background-image:linear-gradient(rgba(7,21,40,.6)_1px,transparent_1px),linear-gradient(90deg,rgba(7,21,40,.6)_1px,transparent_1px)] [background-size:80px_80px]" />
         </div>
 
         <div className="relative mx-auto w-full max-w-[1500px] px-6 pb-14 pt-40 lg:px-10 lg:pb-20">
-          <div className="grid gap-14 lg:grid-cols-[1fr_0.32fr] lg:items-end">
+          <div className="grid gap-14 lg:grid-cols-[1fr_0.38fr] lg:items-end">
             <div>
               <Reveal>
                 <p className="mb-8 text-[10px] font-bold tracking-[0.28em] text-black/35">
@@ -650,15 +803,13 @@ export default function Home() {
 
             <Reveal delay={0.3}>
               <div className="hidden lg:block">
-                <div className="border-l border-black/10 pl-7">
-                  <p className="text-[9px] font-bold tracking-[0.2em] text-black/30">
-                    BUSINESS MOTION LABS
-                  </p>
-
-                  <p className="mt-4 text-sm leading-6 text-black/45">
-                    Digital systems built to help businesses move.
-                  </p>
-                </div>
+                <PhotoPanel
+                  src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=85"
+                  alt="Modern technology-focused workspace"
+                  eyebrow="DIGITAL BUSINESS / TECHNOLOGY"
+                  title="Digital systems built around the way your business actually operates."
+                  className="min-h-[560px]"
+                />
               </div>
             </Reveal>
           </div>
@@ -672,7 +823,6 @@ export default function Home() {
             <p className="mb-8 text-[10px] font-bold tracking-[0.25em] text-black/30">
               THE IDEA
             </p>
-
             <h2 className="max-w-6xl text-4xl font-medium leading-[1] tracking-[-0.06em] sm:text-6xl lg:text-8xl">
               Your business deserves more than just a{" "}
               <span className="text-black/20">website.</span>
@@ -683,7 +833,6 @@ export default function Home() {
                 Your digital presence is more than a homepage. It is the path
                 customers take from discovery to decision.
               </p>
-
               <p className="text-lg leading-8 text-black/55">
                 We connect the experiences, technology and systems behind that
                 journey so the digital side of the business works harder.
@@ -693,18 +842,220 @@ export default function Home() {
         </div>
       </section>
 
-      {/* APPROACH / AUDIT ROADMAP */}
-      <AuditRoadmap />
+      {/* APPROACH */}
+      <section id="approach" className="scroll-mt-24 bg-[#071528] text-white">
+        <div className="mx-auto max-w-[1500px] px-6 py-28 lg:px-10 lg:py-36">
+          <div className="grid gap-14 lg:grid-cols-[0.65fr_1.35fr]">
+            <Reveal>
+              <p className="text-[10px] font-bold tracking-[0.25em] text-white/30">
+                OUR APPROACH
+              </p>
+              <h2 className="mt-8 max-w-xl text-5xl font-medium leading-[0.95] tracking-[-0.06em] sm:text-7xl">
+                Before we build,
+                <br />
+                <span className="text-white/25">we understand.</span>
+              </h2>
+              <p className="mt-8 max-w-md text-base leading-7 text-white/45">
+                We don't begin with a template. We begin by understanding
+                where your business is today, what's holding it back and where
+                the strongest opportunities are.
+              </p>
+
+              <div className="mt-10 flex flex-wrap gap-2">
+                {["Audit", "Opportunity", "Roadmap", "Build", "Optimize"].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-white/10 px-3 py-2 text-[9px] font-bold tracking-[0.14em] text-white/40"
+                    >
+                      {item}
+                    </span>
+                  )
+                )}
+              </div>
+            </Reveal>
+
+            <div>
+              <motion.div
+                key={activeApproach}
+                initial={{ opacity: 0, y: 18, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="relative min-h-[540px] overflow-hidden rounded-[30px] border border-white/10 bg-[#0b1f3a] p-6 shadow-2xl sm:p-8"
+              >
+                <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,.45)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.45)_1px,transparent_1px)] [background-size:52px_52px]" />
+                <motion.div
+                  animate={{ x: [0, 25, 0], y: [0, -18, 0] }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-blue-400/15 blur-3xl"
+                />
+
+                <div className="relative flex min-h-[490px] flex-col justify-between">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-[9px] font-bold tracking-[0.24em] text-white/40">
+                        {approachVisuals[activeApproach].label}
+                      </p>
+                      <p className="mt-2 text-xs text-white/25">
+                        BUSINESS MOTION LABS
+                      </p>
+                    </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/45">
+                      ↗
+                    </div>
+                  </div>
+
+                  <div className="grid gap-8 lg:grid-cols-[1fr_0.65fr] lg:items-end">
+                    <div>
+                      <h3 className="max-w-xl text-4xl font-medium leading-[0.98] tracking-[-0.055em] sm:text-5xl">
+                        {approachVisuals[activeApproach].title}
+                      </h3>
+                      <p className="mt-6 max-w-lg text-sm leading-6 text-white/45">
+                        {approachVisuals[activeApproach].description}
+                      </p>
+
+                      <div className="mt-8 grid gap-2 sm:grid-cols-2">
+                        {approachVisuals[activeApproach].chips.map(
+                          (item, index) => (
+                            <motion.div
+                              key={item}
+                              initial={{ opacity: 0, x: -12 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{
+                                duration: 0.4,
+                                delay: index * 0.07,
+                              }}
+                              className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3"
+                            >
+                              <span className="text-xs text-white/65">
+                                {item}
+                              </span>
+                              <span className="text-xs text-white/25">→</span>
+                            </motion.div>
+                          )
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-bold tracking-[0.18em] text-white/35">
+                          SYSTEM VIEW
+                        </span>
+                        <span className="text-[9px] text-white/25">
+                          0{activeApproach + 1}
+                        </span>
+                      </div>
+
+                      <div className="mt-8 flex h-36 items-end gap-2">
+                        {[34, 48, 42, 64, 58, 76, 70, 92].map(
+                          (height, index) => (
+                            <motion.div
+                              key={index}
+                              initial={{ height: 0 }}
+                              animate={{
+                                height: `${Math.max(
+                                  18,
+                                  height + activeApproach * 2
+                                )}%`,
+                              }}
+                              transition={{
+                                duration: 0.6,
+                                delay: index * 0.04,
+                              }}
+                              className="flex-1 rounded-t-lg bg-white/20"
+                            />
+                          )
+                        )}
+                      </div>
+
+                      <div className="mt-4 border-t border-white/10 pt-4">
+                        <p className="text-[9px] font-bold tracking-[0.18em] text-white/30">
+                          DIGITAL PRIORITY
+                        </p>
+                        <p className="mt-2 text-xl font-medium text-white">
+                          {approachVisuals[activeApproach].chips[0]}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <div className="mt-4 grid grid-cols-2 border-t border-white/10 sm:grid-cols-3">
+                {roadmap.map((item, index) => (
+                  <button
+                    key={item.number}
+                    type="button"
+                    onClick={() => setActiveApproach(index)}
+                    className={`border-b border-r border-white/10 p-5 text-left transition sm:p-6 ${
+                      activeApproach === index
+                        ? "bg-white text-[#071528]"
+                        : "text-white hover:bg-white/[0.05]"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] font-bold tracking-[0.2em] opacity-50">
+                        {item.number}
+                      </span>
+                      <span className="text-[9px] font-bold tracking-[0.15em] opacity-40">
+                        {item.short}
+                      </span>
+                    </div>
+                    <div className="mt-8 text-lg font-medium tracking-[-0.03em]">
+                      {item.title}
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                <PhotoPanel
+                  src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80"
+                  alt="Business team planning a digital project"
+                  eyebrow="UNDERSTAND"
+                  title="Business context"
+                  className="min-h-[220px]"
+                />
+                <PhotoPanel
+                  src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"
+                  alt="Technology and digital systems"
+                  eyebrow="BUILD"
+                  title="Technology"
+                  className="min-h-[220px]"
+                />
+                <PhotoPanel
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+                  alt="Analytics dashboard and growth data"
+                  eyebrow="OPTIMIZE"
+                  title="Performance"
+                  className="min-h-[220px]"
+                />
+              </div>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-white/30">NOW → NEXT → LATER</p>
+                <button
+                  type="button"
+                  onClick={scrollToContact}
+                  className="w-fit rounded-full bg-white px-6 py-3 text-[10px] font-bold tracking-[0.15em] text-[#071528] transition hover:bg-white/85"
+                >
+                  START WITH AN AUDIT →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* SERVICES */}
-      <section id="services" className="bg-[#f7f8f5]">
+      <section id="services" className="scroll-mt-24 bg-[#f7f8f5]">
         <div className="mx-auto max-w-[1500px] px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <div className="mb-20 grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
               <p className="text-[10px] font-bold tracking-[0.25em] text-black/30">
                 WHAT WE BUILD
               </p>
-
               <h2 className="max-w-5xl text-4xl font-medium leading-[1] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
                 Technology that connects the{" "}
                 <span className="text-black/20">business.</span>
@@ -717,25 +1068,92 @@ export default function Home() {
               <Reveal
                 key={service.number}
                 delay={index * 0.05}
-                className="border-b border-black/10 p-7 md:border-r lg:p-10"
+                className="border-b border-black/10 p-6 md:border-r lg:p-8"
               >
-                <div className="flex min-h-[270px] flex-col justify-between">
-                  <div className="flex items-start justify-between">
-                    <span className="text-[10px] font-bold tracking-[0.18em] text-black/25">
-                      {service.number}
-                    </span>
-
-                    <span className="text-black/20">↗</span>
-                  </div>
-
+                <div className="flex min-h-[490px] flex-col justify-between">
                   <div>
-                    <h3 className="text-2xl font-medium tracking-[-0.04em]">
+                    <div className="relative mb-8 h-52 overflow-hidden rounded-[22px] bg-[#071528] shadow-lg">
+                      <img
+                        src={[
+                          "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=80",
+                          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=80",
+                          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80",
+                          "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80",
+                          "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80",
+                          "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80",
+                        ][index]}
+                        alt=""
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover opacity-65 transition duration-700 hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#071528] via-[#071528]/45 to-black/10" />
+                      <div className="relative flex h-full flex-col justify-between p-5 text-white">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[8px] font-bold tracking-[0.2em] text-white/55">
+                            {serviceVisuals[index].eyebrow}
+                          </span>
+                          <span className="rounded-full border border-white/20 bg-black/10 px-2 py-1 text-[7px] text-white/45 backdrop-blur">
+                            SYSTEM
+                          </span>
+                        </div>
+
+                        <div className="rounded-xl border border-white/10 bg-[#071528]/55 p-3 backdrop-blur-md">
+                          <div className="flex items-center gap-1.5 overflow-hidden">
+                            {serviceVisuals[index].title
+                              .split(" → ")
+                              .map((label, itemIndex, arr) => (
+                                <div
+                                  key={label}
+                                  className="flex min-w-0 flex-1 items-center gap-1.5"
+                                >
+                                  <div className="flex min-h-10 min-w-0 flex-1 items-center justify-center rounded-lg border border-white/10 bg-white/[0.08] px-1.5 text-center text-[7px] font-bold tracking-[0.03em] text-white/75">
+                                    {label}
+                                  </div>
+                                  {itemIndex < arr.length - 1 && (
+                                    <span className="shrink-0 text-white/35">
+                                      →
+                                    </span>
+                                  )}
+                                </div>
+                              ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start justify-between">
+                      <span className="text-[10px] font-bold tracking-[0.18em] text-black/25">
+                        {service.number}
+                      </span>
+                      <span className="text-black/20">↗</span>
+                    </div>
+
+                    <h3 className="mt-5 text-2xl font-medium tracking-[-0.04em]">
                       {service.title}
                     </h3>
 
                     <p className="mt-5 text-sm leading-6 text-black/45">
                       {service.description}
                     </p>
+                  </div>
+
+                  <div className="mt-8 flex flex-wrap gap-2">
+                    {service.title === "Growth & SEO" &&
+                      ["Technical SEO", "Local SEO", "Analytics"].map(
+                        (tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-black/10 px-3 py-2 text-[8px] font-bold tracking-[0.1em] text-black/40"
+                          >
+                            {tag}
+                          </span>
+                        )
+                      )}
+                    {service.title !== "Growth & SEO" && (
+                      <span className="rounded-full border border-black/10 px-3 py-2 text-[8px] font-bold tracking-[0.1em] text-black/35">
+                        BUSINESS SYSTEM
+                      </span>
+                    )}
                   </div>
                 </div>
               </Reveal>
@@ -744,8 +1162,136 @@ export default function Home() {
         </div>
       </section>
 
-      {/* INDUSTRIES */}
+      {/* VISUAL STORY */}
+      <section className="bg-[#071528] text-white">
+        <div className="mx-auto max-w-[1500px] px-6 py-28 lg:px-10 lg:py-36">
+          <div className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
+            <PhotoPanel
+              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=88"
+              alt="Modern restaurant and hospitality environment"
+              eyebrow="DIGITAL EXPERIENCES / HOSPITALITY"
+              title="The physical business and the digital experience should feel like the same brand."
+              className="min-h-[560px]"
+            />
+            <div className="grid gap-4">
+              <PhotoPanel
+                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=85"
+                alt="Modern premium fitness environment"
+                eyebrow="FITNESS / LEAD GENERATION"
+                title="Turn attention into action."
+                className="min-h-[272px]"
+              />
+              <PhotoPanel
+                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85"
+                alt="Business team collaborating around a table"
+                eyebrow="BUSINESS / OPERATIONS"
+                title="Connect people, tools and systems."
+                className="min-h-[272px]"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SEO SPOTLIGHT */}
       <section className="bg-white">
+        <div className="mx-auto max-w-[1500px] px-6 py-28 lg:px-10 lg:py-36">
+          <div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
+            <Reveal>
+              <p className="text-[10px] font-bold tracking-[0.25em] text-black/30">
+                GROWTH & SEO
+              </p>
+              <h2 className="mt-8 text-5xl font-medium leading-[0.95] tracking-[-0.06em] sm:text-7xl">
+                Make your business easier to{" "}
+                <span className="text-black/20">find.</span>
+              </h2>
+              <p className="mt-8 max-w-md text-base leading-7 text-black/50">
+                Search is part of the customer journey. We connect technical
+                SEO, local visibility, analytics and conversion so traffic has
+                somewhere useful to go.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <div className="relative overflow-hidden rounded-[30px] bg-[#071528] p-6 text-white shadow-2xl sm:p-8">
+                <div className="absolute inset-0 opacity-15 [background-image:linear-gradient(rgba(255,255,255,.45)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.45)_1px,transparent_1px)] [background-size:44px_44px]" />
+
+                <div className="relative">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-[9px] font-bold tracking-[0.2em] text-white/35">
+                        SEARCH PERFORMANCE
+                      </p>
+                      <p className="mt-2 text-sm text-white/50">
+                        Representative dashboard concept
+                      </p>
+                    </div>
+                    <span className="rounded-full border border-white/10 px-3 py-2 text-[8px] text-white/35">
+                      ANALYTICS
+                    </span>
+                  </div>
+
+                  <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                    {[
+                      ["VISIBILITY", "SEARCH"],
+                      ["DISCOVERY", "LOCAL"],
+                      ["CONVERSION", "LEADS"],
+                    ].map(([label, value], index) => (
+                      <div
+                        key={label}
+                        className="rounded-2xl border border-white/10 bg-white/[0.05] p-4"
+                      >
+                        <p className="text-[8px] font-bold tracking-[0.15em] text-white/30">
+                          {label}
+                        </p>
+                        <p className="mt-4 text-lg font-medium">{value}</p>
+                        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-white/10">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${55 + index * 13}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1 }}
+                            className="h-full rounded-full bg-white/45"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+                    <div className="flex h-44 items-end gap-2">
+                      {[22, 35, 30, 48, 45, 62, 58, 76, 70, 88, 80, 96].map(
+                        (height, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ height: 0 }}
+                            whileInView={{ height: `${height}%` }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 0.7,
+                              delay: index * 0.04,
+                            }}
+                            className="flex-1 rounded-t-lg bg-white/20"
+                          />
+                        )
+                      )}
+                    </div>
+                    <div className="mt-4 flex justify-between border-t border-white/10 pt-4 text-[8px] font-bold tracking-[0.16em] text-white/25">
+                      <span>DISCOVERY</span>
+                      <span>TRAFFIC</span>
+                      <span>LEADS</span>
+                      <span>GROWTH</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* INDUSTRIES */}
+      <section className="bg-[#f7f8f5]">
         <div className="mx-auto max-w-[1500px] px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
@@ -759,24 +1305,41 @@ export default function Home() {
                   <span className="text-black/20">businesses operate.</span>
                 </h2>
 
-                <div className="mt-14 grid grid-cols-2 border-t border-black/10 sm:grid-cols-3">
-                  {[
-                    "Restaurants & Hospitality",
-                    "Fitness & Gyms",
-                    "Local Businesses",
-                    "Professional Services",
-                    "E-commerce",
-                    "Growing Businesses",
-                  ].map((industry, index) => (
-                    <div
-                      key={industry}
-                      className="border-b border-r border-black/10 px-4 py-6 text-sm text-black/55 sm:px-6"
+                <div className="mt-14 grid gap-4 sm:grid-cols-2">
+                  {industries.map((industry, index) => (
+                    <motion.div
+                      key={industry.title}
+                      whileHover={{ y: -5 }}
+                      transition={{ duration: 0.2 }}
+                      className="group relative min-h-[310px] overflow-hidden rounded-[24px] bg-[#071528] text-white shadow-lg"
                     >
-                      <span className="mr-3 text-[9px] text-black/25">
-                        0{index + 1}
-                      </span>
-                      {industry}
-                    </div>
+                      <img
+                        src={industry.image}
+                        alt=""
+                        className="absolute inset-0 h-full w-full object-cover opacity-55 transition duration-700 group-hover:scale-105 group-hover:opacity-70"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#071528] via-[#071528]/35 to-transparent" />
+
+                      <div className="relative flex h-full flex-col justify-between p-6 sm:p-7">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[9px] font-bold tracking-[0.18em] text-white/45">
+                            0{index + 1}
+                          </span>
+                          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/50">
+                            ↗
+                          </span>
+                        </div>
+
+                        <div>
+                          <h3 className="text-2xl font-medium tracking-[-0.04em]">
+                            {industry.title}
+                          </h3>
+                          <p className="mt-2 max-w-sm text-xs leading-5 text-white/55">
+                            {industry.detail}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -792,7 +1355,7 @@ export default function Home() {
       <MediaShowcase />
 
       {/* PROCESS */}
-      <section id="process" className="bg-white">
+      <section id="process" className="scroll-mt-24 bg-white">
         <div className="mx-auto max-w-[1500px] px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
@@ -807,33 +1370,21 @@ export default function Home() {
                 </h2>
 
                 <div className="mt-16 border-t border-black/10">
-                  {[
-                    ["01", "Design", "Turn the strategy into a clear, premium digital experience."],
-                    ["02", "Build", "Develop the website, application, integrations or systems."],
-                    ["03", "Test", "QA across devices, journeys, forms, payments and key functionality."],
-                    ["04", "Launch", "Put the system in front of real customers."],
-                    ["05", "Measure", "Track performance, behavior and business outcomes."],
-                    ["06", "Improve", "Continuously optimize what we built."],
-                  ].map(([number, title, description], index) => (
+                  {process.map(([number, title, description], index) => (
                     <motion.div
                       key={number}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{
-                        duration: 0.6,
-                        delay: index * 0.05,
-                      }}
+                      transition={{ duration: 0.6, delay: index * 0.05 }}
                       className="grid gap-5 border-b border-black/10 py-8 sm:grid-cols-[80px_1fr_1fr] sm:items-center"
                     >
                       <span className="text-[10px] font-bold tracking-[0.18em] text-black/25">
                         {number}
                       </span>
-
                       <h3 className="text-2xl font-medium tracking-[-0.04em]">
                         {title}
                       </h3>
-
                       <p className="text-sm leading-6 text-black/45">
                         {description}
                       </p>
@@ -847,7 +1398,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="bg-[#f7f8f5]">
+      <section id="about" className="scroll-mt-24 bg-[#f7f8f5]">
         <div className="mx-auto max-w-[1500px] px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
@@ -867,12 +1418,57 @@ export default function Home() {
                   systems and operations.
                 </p>
 
+                <div className="mt-12 grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
+                  <PhotoPanel
+                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85"
+                    alt="Technology team collaborating in an office"
+                    eyebrow="THE PEOPLE BEHIND THE SYSTEMS"
+                    title="Strategy, technology and execution."
+                    className="min-h-[430px]"
+                  />
+
+                  <div className="overflow-hidden rounded-[28px] bg-[#071528] p-6 text-white sm:p-8">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[9px] font-bold tracking-[0.2em] text-white/35">
+                      BUSINESS MOTION LABS / SYSTEM VIEW
+                    </span>
+                    <span className="rounded-full border border-white/10 px-3 py-1.5 text-[8px] text-white/35">
+                      CONNECTED
+                    </span>
+                  </div>
+
+                  <div className="mt-8 grid gap-2 sm:grid-cols-4">
+                    {["EXPERIENCE", "GROWTH", "AUTOMATION", "TECHNOLOGY"].map(
+                      (item, index) => (
+                        <div
+                          key={item}
+                          className="rounded-xl border border-white/10 bg-white/[0.05] p-4"
+                        >
+                          <div className="mb-6 h-1.5 w-10 rounded-full bg-white/20" />
+                          <p className="text-[9px] font-bold tracking-[0.12em] text-white/55">
+                            {item}
+                          </p>
+                          <p className="mt-2 text-[10px] text-white/25">
+                            0{index + 1} / SYSTEM
+                          </p>
+                        </div>
+                      )
+                    )}
+                  </div>
+
+                  <div className="mt-3 h-px bg-white/10" />
+                  <div className="mt-4 flex items-center justify-between text-[9px] tracking-[0.14em] text-white/30">
+                    <span>CONNECTED DIGITAL SYSTEMS</span>
+                    <span>MOVE →</span>
+                  </div>
+                  </div>
+                </div>
+
                 <div className="mt-16 grid gap-4 sm:grid-cols-2">
                   <div className="rounded-2xl border border-black/10 bg-white p-7">
                     <p className="text-[9px] font-bold tracking-[0.2em] text-black/30">
                       TECHNOLOGY & DEVELOPMENT
                     </p>
-
                     <p className="mt-3 text-xl font-medium tracking-[-0.03em]">
                       Yash Raj
                     </p>
@@ -882,7 +1478,6 @@ export default function Home() {
                     <p className="text-[9px] font-bold tracking-[0.2em] text-black/30">
                       BUSINESS DEVELOPMENT & OPERATIONS
                     </p>
-
                     <p className="mt-3 text-xl font-medium tracking-[-0.03em]">
                       Manas Dang
                     </p>
@@ -904,7 +1499,6 @@ export default function Home() {
         <div className="mx-auto max-w-[1500px] border-t border-white/10 px-6 py-8 lg:px-10">
           <div className="flex flex-col gap-5 text-[9px] font-bold tracking-[0.18em] text-white/30 sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 BUSINESS MOTION LABS</span>
-
             <span>DIGITAL TECHNOLOGY / GROWTH / SYSTEMS</span>
           </div>
         </div>
