@@ -3,207 +3,270 @@
 import { FormEvent, useState } from "react";
 
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error" | "";
+    message: string;
+  }>({
+    type: "",
+    message: "",
+  });
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    const form = new FormData(e.currentTarget);
+    setIsSubmitting(true);
+    setStatus({ type: "", message: "" });
 
-    const name = form.get("name");
-    const business = form.get("business");
-    const email = form.get("email");
-    const phone = form.get("phone");
-    const country = form.get("country");
-    const website = form.get("website");
-    const service = form.get("service");
-    const budget = form.get("budget");
-    const details = form.get("details");
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    const subject = `New Project Inquiry — ${business}`;
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      businessName: String(formData.get("businessName") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      phone: String(formData.get("phone") || "").trim(),
+      website: String(formData.get("website") || "").trim(),
+      country: String(formData.get("country") || "").trim(),
+      service: String(formData.get("service") || "").trim(),
+      projectDetails: String(formData.get("projectDetails") || "").trim(),
+      budget: String(formData.get("budget") || "").trim(),
+    };
 
-    const body = `
-NEW PROJECT INQUIRY
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-Name:
-${name}
+      const rawResponse = await response.text();
 
-Business:
-${business}
+      let result: {
+        success?: boolean;
+        message?: string;
+      } = {};
 
-Email:
-${email}
+      try {
+        result = rawResponse ? JSON.parse(rawResponse) : {};
+      } catch {
+        result = {};
+      }
 
-Phone:
-${phone}
+      if (!response.ok || result.success === false) {
+        throw new Error(
+          result.message ||
+            "We couldn't send your inquiry. Please try again."
+        );
+      }
 
-Country:
-${country}
+      setStatus({
+        type: "success",
+        message:
+          "Thank you. Your project inquiry has been sent successfully. We'll be in touch shortly.",
+      });
 
-Current Website:
-${website || "Not provided"}
+      form.reset();
+    } catch (error) {
+      console.error("Contact form error:", error);
 
-Service Required:
-${service}
-
-Budget:
-${budget}
-
-Project Details:
-${details}
-`;
-
-    window.location.href =
-      `mailto:hello@businessmotionlabs.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    setSent(true);
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
+  const inputClass =
+    "w-full rounded-xl border border-black/10 bg-black/[0.03] px-4 py-3.5 text-[#101827] outline-none transition placeholder:text-black/35 focus:border-black/30 focus:bg-black/[0.05]";
+
+  const labelClass = "mb-2 block text-sm font-medium text-[#101827]";
+
   return (
-    <section
-      id="contact"
-      className="bg-[#071528] px-6 py-28 text-white lg:px-10 lg:py-40"
-    >
-      <div className="mx-auto max-w-[1400px]">
-        <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="text-[10px] font-bold tracking-[0.25em] text-white/35">
-              START A PROJECT
-            </p>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <label htmlFor="name" className={labelClass}>
+            Name *
+          </label>
 
-            <h2 className="mt-8 text-5xl font-medium leading-[0.9] tracking-[-0.06em] sm:text-7xl lg:text-[6rem]">
-              Let's move
-              <br />
-              your business
-              <br />
-              <span className="text-white/25">forward.</span>
-            </h2>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            placeholder="Your name"
+            className={inputClass}
+          />
+        </div>
 
-            <p className="mt-10 max-w-md text-base leading-7 text-white/45">
-              Tell us what you're building, what isn't working, or where you
-              want your business to go.
-            </p>
+        <div>
+          <label htmlFor="businessName" className={labelClass}>
+            Business Name *
+          </label>
 
-            <div className="mt-12 text-sm text-white/40">
-              hello@businessmotionlabs.com
-            </div>
-          </div>
+          <input
+            id="businessName"
+            name="businessName"
+            type="text"
+            required
+            placeholder="Your business"
+            className={inputClass}
+          />
+        </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="grid gap-5"
-          >
-            <div className="grid gap-5 sm:grid-cols-2">
-              <input
-                required
-                name="name"
-                placeholder="Your name *"
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-white/30"
-              />
+        <div>
+          <label htmlFor="email" className={labelClass}>
+            Email *
+          </label>
 
-              <input
-                required
-                name="business"
-                placeholder="Business name *"
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-white/30"
-              />
-            </div>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            placeholder="you@company.com"
+            className={inputClass}
+          />
+        </div>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              <input
-                required
-                type="email"
-                name="email"
-                placeholder="Email address *"
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-white/30"
-              />
+        <div>
+          <label htmlFor="phone" className={labelClass}>
+            Phone
+          </label>
 
-              <input
-                name="phone"
-                placeholder="Phone number"
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-white/30"
-              />
-            </div>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="+1 555 123 4567"
+            className={inputClass}
+          />
+        </div>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              <input
-                name="country"
-                placeholder="Country"
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-white/30"
-              />
+        <div>
+          <label htmlFor="website" className={labelClass}>
+            Current Website
+          </label>
 
-              <input
-                name="website"
-                placeholder="Current website"
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-white/30"
-              />
-            </div>
+          <input
+            id="website"
+            name="website"
+            type="url"
+            placeholder="https://yourbusiness.com"
+            className={inputClass}
+          />
+        </div>
 
-            <select
-              required
-              name="service"
-              defaultValue=""
-              className="rounded-xl border border-white/10 bg-[#0b1f3a] px-5 py-4 text-sm text-white outline-none focus:border-white/30"
-            >
-              <option value="" disabled>
-                What do you need? *
-              </option>
-              <option>Website</option>
-              <option>E-commerce</option>
-              <option>Online Ordering</option>
-              <option>Automation</option>
-              <option>CRM / Lead System</option>
-              <option>Custom Software</option>
-              <option>SEO / Digital Growth</option>
-              <option>Something else</option>
-            </select>
+        <div>
+          <label htmlFor="country" className={labelClass}>
+            Country
+          </label>
 
-            <select
-              name="budget"
-              defaultValue=""
-              className="rounded-xl border border-white/10 bg-[#0b1f3a] px-5 py-4 text-sm text-white outline-none focus:border-white/30"
-            >
-              <option value="" disabled>
-                Estimated project budget
-              </option>
-              <option>Under $1,000</option>
-              <option>$1,000 – $2,500</option>
-              <option>$2,500 – $5,000</option>
-              <option>$5,000 – $10,000</option>
-              <option>$10,000+</option>
-              <option>Not sure yet</option>
-            </select>
-
-            <textarea
-              required
-              name="details"
-              rows={6}
-              placeholder="Tell us about your project *"
-              className="resize-none rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 text-sm text-white outline-none placeholder:text-white/30 focus:border-white/30"
-            />
-
-            <button
-              type="submit"
-              className="group mt-2 flex items-center justify-between rounded-xl bg-white px-6 py-5 text-left text-[#071528] transition hover:bg-white/90"
-            >
-              <span className="text-[10px] font-bold tracking-[0.18em]">
-                SEND PROJECT INQUIRY
-              </span>
-
-              <span className="text-lg transition-transform group-hover:translate-x-1">
-                →
-              </span>
-            </button>
-
-            {sent && (
-              <p className="text-xs text-white/40">
-                Your email application should now open with the project
-                details prepared.
-              </p>
-            )}
-          </form>
+          <input
+            id="country"
+            name="country"
+            type="text"
+            placeholder="United States"
+            className={inputClass}
+          />
         </div>
       </div>
-    </section>
+
+      <div>
+        <label htmlFor="service" className={labelClass}>
+          What do you need help with? *
+        </label>
+
+        <select
+          id="service"
+          name="service"
+          required
+          defaultValue=""
+          className={inputClass}
+        >
+          <option value="" disabled>
+            Select a service
+          </option>
+          <option value="Website">Website</option>
+          <option value="E-commerce">E-commerce</option>
+          <option value="Online Ordering">Online Ordering</option>
+          <option value="Automation">Automation</option>
+          <option value="CRM / Lead System">CRM / Lead System</option>
+          <option value="Custom Software">Custom Software</option>
+          <option value="SEO / Digital Growth">
+            SEO / Digital Growth
+          </option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="projectDetails" className={labelClass}>
+          Tell us about your project *
+        </label>
+
+        <textarea
+          id="projectDetails"
+          name="projectDetails"
+          required
+          rows={6}
+          placeholder="Tell us about your business, what you want to build, and what you're trying to achieve."
+          className={`${inputClass} resize-none`}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="budget" className={labelClass}>
+          Estimated Budget
+        </label>
+
+        <select
+          id="budget"
+          name="budget"
+          defaultValue=""
+          className={inputClass}
+        >
+          <option value="">Select a budget range</option>
+          <option value="Under $1,000">Under $1,000</option>
+          <option value="$1,000 – $2,500">$1,000 – $2,500</option>
+          <option value="$2,500 – $5,000">$2,500 – $5,000</option>
+          <option value="$5,000 – $10,000">$5,000 – $10,000</option>
+          <option value="$10,000+">$10,000+</option>
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+      </div>
+
+      {status.message && (
+        <div
+          className={`rounded-xl border px-4 py-4 text-sm ${
+            status.type === "success"
+              ? "border-green-600/20 bg-green-50 text-green-800"
+              : "border-red-600/20 bg-red-50 text-red-800"
+          }`}
+        >
+          {status.message}
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="inline-flex w-full items-center justify-center rounded-xl bg-[#101827] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#1a2538] disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {isSubmitting ? "Sending Inquiry..." : "Send Project Inquiry"}
+      </button>
+
+      <p className="text-center text-xs text-black/40">
+        Your information is only used to respond to your project inquiry.
+      </p>
+    </form>
   );
 }
