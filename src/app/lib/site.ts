@@ -5,7 +5,7 @@
 
 /** Google Calendar appointment-schedule link. Leave "" until it exists:
  *  every "Book a call" button then falls back to the contact form. */
-export const BOOKING_URL: string = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0J3TGBCPbvPMSXBK2_KWieUJ6gjVQRPE72e_MubCq8FFijz7_KZqUgBYwuOJxnWPZsxrffYaRl";
+export const BOOKING_URL: string = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GaRB3RANbrTapOfE_A5IRZQp3eDkcC0GFGum_R5eYo-5uC8giuY1IkflQnecG6o9B7xeViWAd";
 
 /** The one official web address. Used for the sitemap, robots.txt and social link previews. */
 export const SITE_URL = "https://businessmotionlabs.com";
