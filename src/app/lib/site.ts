@@ -5,7 +5,7 @@
 
 /** Google Calendar appointment-schedule link. Leave "" until it exists:
  *  every "Book a call" button then falls back to the contact form. */
-export const BOOKING_URL: string = "";
+export const BOOKING_URL: string = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0J3TGBCPbvPMSXBK2_KWieUJ6gjVQRPE72e_MubCq8FFijz7_KZqUgBYwuOJxnWPZsxrffYaRl";
 
 export const CONTACT_EMAIL = "sales@businessmotionlabs.com";
 

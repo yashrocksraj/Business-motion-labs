@@ -47,7 +47,7 @@ export default function BookPage() {
                 <p className="text-sm font-medium">Pick a time. Slots are shown in your time zone.</p>
                 <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="text-xs underline">Open in new tab</a>
               </div>
-              <iframe src={BOOKING_URL} title="Book a Growth Call" className="h-[760px] w-full border-0" />
+              <iframe src={`${BOOKING_URL}?gv=true`} title="Book a Growth Call" className="h-[760px] w-full border-0" />
             </div>
           ) : (
             <div>
