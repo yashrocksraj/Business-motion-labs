@@ -48,7 +48,7 @@ export const HOME_FAQ: { category: string; items: { q: string; a: string }[] }[]
     items: [
       { q: "What exactly do you do?", a: "We fix the path between someone finding your business online and becoming a customer: a fast mobile website, online booking or ordering, an instant reply to every enquiry, automatic follow-ups and review requests, and a monthly report on what's working." },
       { q: "Who do you work with?", a: "Local businesses that live on bookings, calls and repeat customers: gyms and fitness studios, yoga and pilates studios, salons and beauty businesses, restaurants and cafés, and plumbers and other home-service businesses." },
-      { q: "What happens on the free Growth Call?", a: "It's a 20-minute video call. Before it, we look at your website, Google profile and booking journey the way a new customer would. On the call we show you what we found and the three changes that would help most. There's no obligation, and you keep the findings." },
+      { q: "What happens on the free Growth Call?", a: "It's a 30-minute video call. Before it, we look at your website, Google profile and booking journey the way a new customer would. On the call we show you what we found and the three changes that would help most. There's no obligation, and you keep the findings." },
       { q: "Do you really audit my website for free?", a: "Yes. Send us your website through the form and we'll send a short report with the three things to fix first, usually within 2 working days." },
     ],
   },

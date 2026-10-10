@@ -134,7 +134,7 @@ export default function AboutPage() {
         </div>
         <div className="mt-16 flex flex-col gap-4 rounded-[28px] bg-white p-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-xl text-lg leading-7">
-            Want to see how we&apos;d approach your business? <span className="text-black/50">Start with a free 20-minute Growth Call.</span>
+            Want to see how we&apos;d approach your business? <span className="text-black/50">Start with a free 30-minute Growth Call.</span>
           </p>
           <BookButton />
         </div>

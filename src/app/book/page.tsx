@@ -5,12 +5,12 @@ import { BOOKING_URL, auditHref } from "../lib/site";
 
 export const metadata: Metadata = {
   title: "Book a free Growth Call | Business Motion Labs",
-  description: "A free 20-minute video call: we review your website and booking journey and show you the three changes that would bring in the most customers.",
+  description: "A free 30-minute video call: we review your website and booking journey and show you the three changes that would bring in the most customers.",
 };
 
 const steps = [
   ["Before the call", "We review your website, Google profile and booking journey the way a new customer would."],
-  ["On the call (20 min)", "We walk you through what we found and the three changes that would bring in the most customers."],
+  ["On the call (30 min)", "We walk you through what we found and the three changes that would bring in the most customers."],
   ["After the call", "You get a written plan and one fixed price. No pressure. You keep the findings either way."],
 ];
 
@@ -20,7 +20,7 @@ export default function BookPage() {
       <SiteHeader />
       <section className="mx-auto grid max-w-[1500px] gap-12 px-6 pb-24 pt-36 lg:grid-cols-[0.85fr_1.15fr] lg:px-10 lg:pt-44">
         <div>
-          <p className="text-[10px] font-bold tracking-[0.25em] text-black/40">FREE GROWTH CALL · 20 MINUTES · VIDEO</p>
+          <p className="text-[10px] font-bold tracking-[0.25em] text-black/40">FREE GROWTH CALL · 30 MINUTES · VIDEO</p>
           <h1 className="mt-6 text-[clamp(2.6rem,5vw,4.8rem)] font-medium leading-[0.95] tracking-[-0.05em]">
             Let&apos;s find the customers your website is losing.
           </h1>

@@ -33,7 +33,7 @@ export default function IndustryPage({ data }: { data: Industry }) {
               </a>
             </div>
             <p className="mt-6 text-xs text-black/40">
-              Free 20-minute video call. Times shown in your own time zone.
+              Free 30-minute video call. Times shown in your own time zone.
             </p>
           </div>
           <figure className="relative min-h-[420px] overflow-hidden rounded-[28px] bg-[#071528] lg:min-h-[560px]">
@@ -158,7 +158,7 @@ export default function IndustryPage({ data }: { data: Industry }) {
           </h2>
           <ol className="mt-14 grid gap-4 md:grid-cols-4">
             {[
-              ["Free Growth Call", "20 minutes. We show you what we found on your website and what to fix first."],
+              ["Free Growth Call", "30 minutes. We show you what we found on your website and what to fix first."],
               ["Week 1", "Kick-off: access to your website and Google profile, plan agreed."],
               ["Weeks 2–3", "We build, test every step on a real phone, and launch."],
               ["Every month", "We watch the numbers, improve what's slow and send you a report."],
@@ -201,7 +201,7 @@ export default function IndustryPage({ data }: { data: Industry }) {
         <div className="mx-auto max-w-[1500px] px-6 py-24 text-left lg:px-10 lg:py-32">
           <Eyebrow light>FREE GROWTH CALL</Eyebrow>
           <h2 className="mt-6 max-w-5xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-7xl">
-            See what your website is costing you. <span className="text-white/30">In 20 minutes.</span>
+            See what your website is costing you. <span className="text-white/30">In 30 minutes.</span>
           </h2>
           <p className="mt-8 max-w-2xl text-lg leading-8 text-white/60">
             We review your website, Google profile and booking journey before the call, then show you the three
