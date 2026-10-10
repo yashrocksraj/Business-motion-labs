@@ -50,6 +50,28 @@ export async function POST(request: Request) {
 
     const kind = escapeHtml(formType || "New Project Inquiry");
 
+    // For Growth Call requests: one click adds a draft event to Google Calendar
+    // (pick the time, then the customer is already on the invite).
+    let calendarButton = "";
+    if (formType === "Growth Call request") {
+      const params = new URLSearchParams({
+        action: "TEMPLATE",
+        text: `Growth Call: ${String(name || "")}${businessName ? ` (${String(businessName)})` : ""}`,
+        details: [
+          `Business: ${String(businessName || "-")}`,
+          `Email: ${String(email || "")}`,
+          `Phone: ${String(phone || "-")}`,
+          `Country: ${String(country || "-")}`,
+          `Website: ${String(website || "-")}`,
+          "",
+          String(projectDetails || ""),
+        ].join("\n"),
+        add: String(email || ""),
+      });
+      const url = `https://calendar.google.com/calendar/render?${params.toString()}`;
+      calendarButton = `<p style="margin: 0 0 24px;"><a href="${escapeHtml(url)}" style="display: inline-block; background: #071528; color: #ffffff; padding: 12px 20px; border-radius: 999px; text-decoration: none; font-weight: bold;">Add to my Google Calendar</a></p>`;
+    }
+
     // ---------------------------------------------------------
     // Required fields
     // ---------------------------------------------------------
@@ -94,6 +116,7 @@ export async function POST(request: Request) {
           <h1 style="font-size: 28px; margin-bottom: 8px;">
             ${kind}
           </h1>
+          ${calendarButton}
 
           <p style="color: #6b7280; margin-bottom: 32px;">
             Submitted through the Business Motion Labs website.

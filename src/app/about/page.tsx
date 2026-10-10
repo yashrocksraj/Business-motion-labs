@@ -123,6 +123,7 @@ export default function AboutPage() {
                   <h3 className="text-2xl font-medium tracking-[-0.03em]">{m.name}</h3>
                   <p className="mt-1 text-[10px] font-bold tracking-[0.18em] text-black/40">{m.role.toUpperCase()}</p>
                   <p className="mt-4 text-sm leading-6 text-black/60">{m.bio}</p>
+                  <a href={`mailto:${m.email}`} className="mt-4 block text-sm font-medium text-[#071528] underline underline-offset-4">{m.email}</a>
                   {m.linkedin && (
                     <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm underline underline-offset-4">LinkedIn</a>
                   )}

@@ -12,7 +12,7 @@ export const CONTACT_EMAIL = "sales@businessmotionlabs.com";
 /* Real contact details. Anything left "" is simply not shown on the site. */
 export const PHONE: string = ""; // e.g. "+91 98xxxxxxxx"
 export const WHATSAPP: string = ""; // digits only with country code, e.g. "9198xxxxxxxx"
-export const ADDRESS: string = ""; // office address shown in the footer
+export const ADDRESS: string = "36 A/1, Industrial Area, Dada Nagar, Kanpur, Uttar Pradesh 208022, India"; // office address shown in the footer
 export const LINKEDIN: string = ""; // company LinkedIn URL
 export const INSTAGRAM: string = ""; // Instagram URL
 
@@ -20,6 +20,7 @@ export const TEAM = [
   {
     name: "Yash Raj",
     role: "Technology & Development",
+    email: "yash@businessmotionlabs.com",
     bio: "Leads product and engineering: websites, booking and ordering flows, integrations and automation, and the quality bar every launch has to clear.",
     photo: "", // e.g. "/team/yash.jpg" once a real photo is added to /public/team
     linkedin: "",
@@ -27,6 +28,7 @@ export const TEAM = [
   {
     name: "Manas Dang",
     role: "Business Development & Operations",
+    email: "manas@businessmotionlabs.com",
     bio: "Leads client strategy and delivery: audits, Growth Calls, project management and the monthly reporting that keeps every engagement accountable.",
     photo: "",
     linkedin: "",
