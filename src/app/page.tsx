@@ -4,6 +4,10 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useInView } from "motion/react";
 import ContactForm from "./components/ContactForm";
 import MediaShowcase from "./components/MediaShowcase";
+import { SiteFooter } from "./components/SiteChrome";
+import { INDUSTRY_LIST, bookHref, isExternalBooking } from "./lib/site";
+
+const bookLinkProps = isExternalBooking ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
 const services = [
   {
@@ -623,41 +627,18 @@ export default function Home() {
   ];
 
   const industries = [
+    ...INDUSTRY_LIST.map((i) => ({
+      title: i.name,
+      detail: i.card,
+      image: i.image.replace("w=1600", "w=1200"),
+      href: `/${i.slug}`,
+    })),
     {
-      title: "Restaurants & Hospitality",
-      detail: "Ordering, payments, booking, local discovery",
-      image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85",
-    },
-    {
-      title: "Fitness & Gyms",
-      detail: "Lead capture, booking, CRM, automation",
-      image:
-        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85",
-    },
-    {
-      title: "Local Businesses",
-      detail: "SEO, websites, enquiries, conversion",
+      title: "Other Local Businesses",
+      detail: "Clinics, studios, professional and local services",
       image:
         "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
-    },
-    {
-      title: "Professional Services",
-      detail: "Authority, lead generation, customer journeys",
-      image:
-        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",
-    },
-    {
-      title: "E-commerce",
-      detail: "Storefronts, checkout, analytics, growth",
-      image:
-        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=85",
-    },
-    {
-      title: "Growing Businesses",
-      detail: "Strategy, technology, systems, scale",
-      image:
-        "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=85",
+      href: "#contact",
     },
   ];
 
@@ -691,7 +672,7 @@ export default function Home() {
 
             <nav className="hidden items-center gap-7 md:flex">
               {[
-                ["Approach", "#approach"],
+                ["Industries", "#industries"],
                 ["Services", "#services"],
                 ["Work", "#work"],
                 ["Process", "#process"],
@@ -708,13 +689,13 @@ export default function Home() {
             </nav>
 
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={scrollToContact}
+              <a
+                href={bookHref}
+                {...bookLinkProps}
                 className="rounded-full bg-[#071528] px-4 py-2.5 text-[9px] font-bold tracking-[0.12em] text-white transition hover:bg-[#12335d] sm:px-5 sm:text-[10px]"
               >
-                START A PROJECT
-              </button>
+                BOOK A FREE CALL
+              </a>
 
               <button
                 type="button"
@@ -730,7 +711,7 @@ export default function Home() {
               <div className="absolute left-0 right-0 top-[calc(100%+8px)] rounded-3xl border border-black/10 bg-[#f7f8f5] p-5 shadow-xl md:hidden">
                 <div className="grid gap-1">
                   {[
-                    ["Approach", "#approach"],
+                    ["Industries", "#industries"],
                     ["Services", "#services"],
                     ["Work", "#work"],
                     ["Process", "#process"],
@@ -766,33 +747,51 @@ export default function Home() {
             <div>
               <Reveal>
                 <p className="mb-8 text-[10px] font-bold tracking-[0.28em] text-black/35">
-                  DIGITAL TECHNOLOGY / GROWTH / SYSTEMS
+                  WEBSITES / ONLINE BOOKING / AUTOMATIC FOLLOW-UP
                 </p>
               </Reveal>
 
               <Reveal delay={0.1}>
                 <h1 className="max-w-6xl text-[clamp(4rem,10vw,10rem)] font-medium leading-[0.82] tracking-[-0.075em]">
-                  Move Your
+                  More
                   <br />
-                  Business
+                  Customers.
                   <br />
-                  <span className="text-black/20">Forward.</span>
+                  <span className="text-black/20">Less Effort.</span>
                 </h1>
               </Reveal>
 
               <Reveal delay={0.2}>
                 <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-                  <p className="max-w-xl text-base leading-7 text-black/50">
-                    Business Motion Labs helps businesses grow through better
-                    digital experiences, technology, automation and customer
-                    systems.
-                  </p>
+                  <div className="max-w-xl">
+                    <p className="text-base leading-7 text-black/55">
+                      We build websites, online booking and automatic
+                      follow-up for gyms, studios, salons, restaurants and
+                      home-service businesses, so more of the people who find
+                      you online actually become customers.
+                    </p>
+                    <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                      <a
+                        href={bookHref}
+                        {...bookLinkProps}
+                        className="inline-flex items-center justify-center gap-3 rounded-full bg-[#071528] px-6 py-4 text-[10px] font-bold tracking-[0.14em] text-white transition hover:bg-[#12335d]"
+                      >
+                        BOOK A FREE GROWTH CALL <span aria-hidden>→</span>
+                      </a>
+                      <a
+                        href="#contact"
+                        className="inline-flex items-center gap-3 text-[10px] font-bold tracking-[0.14em] text-black/60 hover:text-black"
+                      >
+                        GET A FREE WEBSITE AUDIT <span aria-hidden>↗</span>
+                      </a>
+                    </div>
+                  </div>
 
                   <a
-                    href="#approach"
+                    href="#industries"
                     className="group flex w-fit items-center gap-4 text-[10px] font-bold tracking-[0.16em]"
                   >
-                    SEE HOW WE WORK
+                    WHO WE HELP
                     <span className="flex h-10 w-10 items-center justify-center rounded-full border border-black/15 transition group-hover:bg-[#071528] group-hover:text-white">
                       ↓
                     </span>
@@ -1291,7 +1290,7 @@ export default function Home() {
       </section>
 
       {/* INDUSTRIES */}
-      <section className="bg-[#f7f8f5]">
+      <section id="industries" className="scroll-mt-24 bg-[#f7f8f5]">
         <div className="mx-auto max-w-[1500px] px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
@@ -1307,11 +1306,12 @@ export default function Home() {
 
                 <div className="mt-14 grid gap-4 sm:grid-cols-2">
                   {industries.map((industry, index) => (
-                    <motion.div
+                    <motion.a
                       key={industry.title}
+                      href={industry.href}
                       whileHover={{ y: -5 }}
                       transition={{ duration: 0.2 }}
-                      className="group relative min-h-[310px] overflow-hidden rounded-[24px] bg-[#071528] text-white shadow-lg"
+                      className="group relative block min-h-[310px] overflow-hidden rounded-[24px] bg-[#071528] text-white shadow-lg"
                     >
                       <img
                         src={industry.image}
@@ -1339,7 +1339,7 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                    </motion.div>
+                    </motion.a>
                   ))}
                 </div>
               </div>
@@ -1489,20 +1489,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* GROWTH CALL */}
+      <section className="bg-[#071528] text-white">
+        <div className="mx-auto grid max-w-[1500px] gap-10 px-6 py-24 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:px-10 lg:py-32">
+          <div>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-white/40">
+              FREE GROWTH CALL
+            </p>
+            <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-7xl">
+              See what your website is costing you.{" "}
+              <span className="text-white/30">In 20 minutes.</span>
+            </h2>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-white/60">
+              We review your website, Google profile and booking journey before
+              the call, then show you the three changes that would bring in the
+              most customers. Free, no pressure. Pick a time that suits you;
+              slots are shown in your own time zone.
+            </p>
+          </div>
+          <div className="flex flex-col gap-4 lg:items-end">
+            <a
+              href={bookHref}
+              {...bookLinkProps}
+              className="inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-5 text-[11px] font-bold tracking-[0.14em] text-[#071528] transition hover:bg-white/85"
+            >
+              BOOK A FREE GROWTH CALL <span aria-hidden>→</span>
+            </a>
+            <a
+              href="#contact"
+              className="text-[10px] font-bold tracking-[0.14em] text-white/55 hover:text-white"
+            >
+              OR SEND US YOUR WEBSITE FOR A FREE AUDIT ↓
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section id="contact" className="scroll-mt-28">
         <ContactForm />
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#071528] text-white">
-        <div className="mx-auto max-w-[1500px] border-t border-white/10 px-6 py-8 lg:px-10">
-          <div className="flex flex-col gap-5 text-[9px] font-bold tracking-[0.18em] text-white/30 sm:flex-row sm:items-center sm:justify-between">
-            <span>© 2026 BUSINESS MOTION LABS</span>
-            <span>DIGITAL TECHNOLOGY / GROWTH / SYSTEMS</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
