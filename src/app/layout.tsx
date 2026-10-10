@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Business Motion Labs | Digital Systems That Move Businesses Forward",
+  title: "Business Motion Labs | Websites, Online Booking & Follow-up for Local Businesses",
   description:
-    "Business Motion Labs helps businesses grow through digital experiences, technology, automation, e-commerce, online ordering, SEO, and custom digital systems.",
+    "We help gyms, studios, salons, restaurants and home-service businesses turn website visitors into bookings, orders and calls: fast websites, online booking and automatic follow-up.",
   keywords: [
     "Business Motion Labs",
     "digital technology company",
@@ -33,18 +33,18 @@ export const metadata: Metadata = {
   publisher: "Business Motion Labs",
 
   openGraph: {
-    title: "Business Motion Labs | Digital Systems That Move Businesses Forward",
+    title: "Business Motion Labs | Websites, Online Booking & Follow-up for Local Businesses",
     description:
-      "We build digital systems, experiences, and technology that help businesses move forward.",
+      "More customers from the people who already find you online: websites, online booking and automatic follow-up for local businesses.",
     type: "website",
     siteName: "Business Motion Labs",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Business Motion Labs | Digital Systems That Move Businesses Forward",
+    title: "Business Motion Labs | Websites, Online Booking & Follow-up for Local Businesses",
     description:
-      "We build digital systems, experiences, and technology that help businesses move forward.",
+      "More customers from the people who already find you online: websites, online booking and automatic follow-up for local businesses.",
   },
 
   robots: {
