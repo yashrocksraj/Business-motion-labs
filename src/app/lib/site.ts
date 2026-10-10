@@ -7,6 +7,9 @@
  *  every "Book a call" button then falls back to the contact form. */
 export const BOOKING_URL: string = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0J3TGBCPbvPMSXBK2_KWieUJ6gjVQRPE72e_MubCq8FFijz7_KZqUgBYwuOJxnWPZsxrffYaRl";
 
+/** The one official web address. Used for the sitemap, robots.txt and social link previews. */
+export const SITE_URL = "https://businessmotionlabs.com";
+
 export const CONTACT_EMAIL = "sales@businessmotionlabs.com";
 
 /* Real contact details. Anything left "" is simply not shown on the site. */
@@ -14,7 +17,7 @@ export const PHONE: string = ""; // e.g. "+91 98xxxxxxxx"
 export const WHATSAPP: string = ""; // digits only with country code, e.g. "9198xxxxxxxx"
 export const ADDRESS: string = "36 A/1, Industrial Area, Dada Nagar, Kanpur, Uttar Pradesh 208022, India"; // office address shown in the footer
 export const LINKEDIN: string = ""; // company LinkedIn URL
-export const INSTAGRAM: string = ""; // Instagram URL
+export const INSTAGRAM: string = "https://www.instagram.com/businessmotionlabs/"; // Instagram URL
 
 export const TEAM = [
   {

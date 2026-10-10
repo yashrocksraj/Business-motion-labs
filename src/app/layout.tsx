@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "./lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Business Motion Labs | Websites, Online Booking & Follow-up for Local Businesses",
   description:
     "We help gyms, studios, salons, restaurants and home-service businesses turn website visitors into bookings, orders and calls: fast websites, online booking and automatic follow-up.",
