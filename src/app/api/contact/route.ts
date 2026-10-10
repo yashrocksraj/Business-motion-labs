@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 function escapeHtml(value: unknown): string {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -28,6 +26,9 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    // Created per request so a missing key never breaks the build (e.g. preview deployments).
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // ---------------------------------------------------------
     // Read request body
