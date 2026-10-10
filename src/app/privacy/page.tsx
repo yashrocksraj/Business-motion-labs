@@ -61,7 +61,7 @@ const sections: [string, string[]][] = [
 export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-[#f7f8f5] text-[#071528]">
-      <SiteHeader pricingHref="/gyms#pricing" />
+      <SiteHeader />
       <article className="mx-auto max-w-3xl px-6 pb-24 pt-40">
         <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">LEGAL</p>
         <h1 className="mt-6 text-5xl font-medium tracking-[-0.05em]">Privacy policy</h1>

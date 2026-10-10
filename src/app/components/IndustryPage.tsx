@@ -1,5 +1,5 @@
 import type { Industry } from "../lib/site";
-import { BookButton, SiteFooter, SiteHeader } from "./SiteChrome";
+import { BookButton, SiteFooter, SiteHeader, WhatsAppButton } from "./SiteChrome";
 
 function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
@@ -12,7 +12,7 @@ function Eyebrow({ children, light = false }: { children: React.ReactNode; light
 export default function IndustryPage({ data }: { data: Industry }) {
   return (
     <main className="min-h-screen bg-[#f7f8f5] text-[#071528]">
-      <SiteHeader />
+      <SiteHeader pricingHref="#pricing" />
 
       {/* HERO */}
       <section className="relative overflow-hidden">
@@ -217,6 +217,7 @@ export default function IndustryPage({ data }: { data: Industry }) {
       </section>
 
       <SiteFooter />
+      <WhatsAppButton />
     </main>
   );
 }

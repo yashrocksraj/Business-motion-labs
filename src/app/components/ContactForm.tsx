@@ -3,13 +3,12 @@
 import { FormEvent, useState } from "react";
 
 const services = [
-  "Website / Digital Experience",
-  "E-commerce",
-  "Online Ordering",
-  "Automation",
-  "CRM / Lead System",
-  "Custom Software",
-  "SEO / Digital Growth",
+  "Free website audit",
+  "New or better website",
+  "Online booking / ordering",
+  "Instant replies & follow-up",
+  "Google profile & local search",
+  "Reviews",
   "Other",
 ];
 
@@ -130,18 +129,18 @@ export default function ContactForm() {
           {/* LEFT SIDE */}
           <div>
             <p className="text-[10px] font-bold tracking-[0.25em] text-black/30">
-              START A PROJECT
+              FREE WEBSITE AUDIT
             </p>
 
             <h2 className="mt-7 max-w-xl text-5xl font-medium leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
-              Let's build something that{" "}
-              <span className="text-black/20">moves.</span>
+              Send us your website.{" "}
+              <span className="text-black/20">We&apos;ll tell you what to fix.</span>
             </h2>
 
             <p className="mt-8 max-w-md text-base leading-7 text-black/50">
-              Tell us about your business, what you want to build, and where
-              you want to go. We'll look at the opportunity and get back to
-              you.
+              We check it the way a new customer would: on Google, on a phone,
+              and when they try to book, order or call. You get a short report
+              with the three things to fix first. Free, no obligation.
             </p>
 
             <div className="mt-12 space-y-5 border-t border-black/10 pt-8">
@@ -151,7 +150,8 @@ export default function ContactForm() {
                 </p>
 
                 <p className="mt-2 text-sm text-black/55">
-                  Digital technology / Growth / Systems
+                  Websites, online booking and automatic follow-up for local
+                  businesses
                 </p>
               </div>
 
@@ -161,7 +161,8 @@ export default function ContactForm() {
                 </p>
 
                 <p className="mt-2 text-sm text-black/55">
-                  We'll review your inquiry and get back to you shortly.
+                  A real person replies within one working day. Audit reports
+                  usually arrive within 2 working days.
                 </p>
               </div>
             </div>
@@ -317,7 +318,7 @@ export default function ContactForm() {
                     htmlFor="projectDetails"
                     className={labelClassName}
                   >
-                    Tell us about your project *
+                    Tell us about your business *
                   </label>
 
                   <textarea
@@ -378,7 +379,7 @@ export default function ContactForm() {
                 >
                   {isSubmitting
                     ? "Sending Inquiry..."
-                    : "Send Project Inquiry"}
+                    : "Send for a free audit"}
                 </button>
 
                 <p className="text-center text-[10px] leading-5 text-black/35">

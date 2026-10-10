@@ -9,6 +9,75 @@ export const BOOKING_URL = "";
 
 export const CONTACT_EMAIL = "sales@businessmotionlabs.com";
 
+/* Real contact details. Anything left "" is simply not shown on the site. */
+export const PHONE = ""; // e.g. "+91 98xxxxxxxx"
+export const WHATSAPP = ""; // digits only with country code, e.g. "9198xxxxxxxx"
+export const ADDRESS = ""; // office address shown in the footer
+export const LINKEDIN = ""; // company LinkedIn URL
+export const INSTAGRAM = ""; // Instagram URL
+
+export const TEAM = [
+  {
+    name: "Yash Raj",
+    role: "Technology & Development",
+    bio: "Builds the websites, booking flows and automations, and makes sure everything works on a real phone before it goes live.",
+    photo: "", // e.g. "/team/yash.jpg" once a real photo is added to /public/team
+    linkedin: "",
+  },
+  {
+    name: "Manas Dang",
+    role: "Business Development & Operations",
+    bio: "Runs the Growth Calls and audits, and is your day-to-day contact from kick-off to monthly reports.",
+    photo: "",
+    linkedin: "",
+  },
+];
+
+/** Tools we build with or connect to. Names only, no logos. */
+export const TOOLS = [
+  "Next.js", "React", "WordPress", "Shopify", "Vercel", "Google Business Profile", "Google Analytics 4",
+  "Google Search Console", "Google Calendar", "Google Workspace", "Stripe", "Square", "Fresha", "Vagaro",
+  "Mindbody", "OpenTable", "Toast", "Resend", "WhatsApp Business", "Zapier",
+];
+
+export const HOME_FAQ: { category: string; items: { q: string; a: string }[] }[] = [
+  {
+    category: "Getting started",
+    items: [
+      { q: "What exactly do you do?", a: "We fix the path between someone finding your business online and becoming a customer: a fast mobile website, online booking or ordering, an instant reply to every enquiry, automatic follow-ups and review requests, and a monthly report on what's working." },
+      { q: "Who do you work with?", a: "Local businesses that live on bookings, calls and repeat customers: gyms and fitness studios, yoga and pilates studios, salons and beauty businesses, restaurants and cafés, and plumbers and other home-service businesses." },
+      { q: "What happens on the free Growth Call?", a: "It's a 20-minute video call. Before it, we look at your website, Google profile and booking journey the way a new customer would. On the call we show you what we found and the three changes that would help most. There's no obligation, and you keep the findings." },
+      { q: "Do you really audit my website for free?", a: "Yes. Send us your website through the form and we'll send a short report with the three things to fix first, usually within 2 working days." },
+    ],
+  },
+  {
+    category: "Pricing & payment",
+    items: [
+      { q: "How much does it cost?", a: "Every business is different, so we share pricing on the free Growth Call. You get one fixed price in writing: a one-time setup fee plus a simple monthly plan. No hidden extras." },
+      { q: "How do I pay?", a: "By invoice, in US dollars or your local currency, by card or bank transfer. Setup is paid 50% to start and 50% at launch; the monthly plan is billed in advance." },
+      { q: "Is there a long contract?", a: "No long lock-in. Monthly plans have a 3-month minimum, then run month to month with 30 days' notice." },
+      { q: "Are there other costs?", a: "Only things you'd pay for anyway, directly to the provider: for example ad spend, SMS credits or your booking software subscription. We tell you about these up front." },
+    ],
+  },
+  {
+    category: "Working with us",
+    items: [
+      { q: "Where is your team, and what about time zones?", a: "Our team is based in India and works with clients in the US, UK, Canada and Australia. We schedule calls in your time zone and reply to messages within one working day." },
+      { q: "How long until it's live?", a: "Most projects go live in about 3 weeks. You'll need around an hour with us in the first week; we handle the rest." },
+      { q: "Do I own my website and data?", a: "Yes. Your website, domain, customer list and accounts are yours. If you ever leave, we hand everything over." },
+      { q: "Can you work with the tools I already use?", a: "Usually, yes. We connect to common booking, ordering, payment and calendar tools rather than asking you to switch." },
+    ],
+  },
+  {
+    category: "Results",
+    items: [
+      { q: "Do you guarantee results?", a: "No honest agency can guarantee a number of new customers. What we do guarantee is a clear plan, work delivered as agreed, and a monthly report so you can see exactly what's happening." },
+      { q: "How will I know it's working?", a: "Each month you get a short report: visits, enquiries, bookings or calls, reviews, and what we're improving next." },
+      { q: "Do you have case studies?", a: "We're a new agency, so we're working with our first founding clients now. Their results will be published here, with their permission, as soon as they're live." },
+    ],
+  },
+];
+
 export const bookHref = BOOKING_URL || "/#contact";
 export const isExternalBooking = BOOKING_URL !== "";
 
