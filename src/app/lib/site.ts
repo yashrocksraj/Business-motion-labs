@@ -5,16 +5,16 @@
 
 /** Google Calendar appointment-schedule link. Leave "" until it exists:
  *  every "Book a call" button then falls back to the contact form. */
-export const BOOKING_URL = "";
+export const BOOKING_URL: string = "";
 
 export const CONTACT_EMAIL = "sales@businessmotionlabs.com";
 
 /* Real contact details. Anything left "" is simply not shown on the site. */
-export const PHONE = ""; // e.g. "+91 98xxxxxxxx"
-export const WHATSAPP = ""; // digits only with country code, e.g. "9198xxxxxxxx"
-export const ADDRESS = ""; // office address shown in the footer
-export const LINKEDIN = ""; // company LinkedIn URL
-export const INSTAGRAM = ""; // Instagram URL
+export const PHONE: string = ""; // e.g. "+91 98xxxxxxxx"
+export const WHATSAPP: string = ""; // digits only with country code, e.g. "9198xxxxxxxx"
+export const ADDRESS: string = ""; // office address shown in the footer
+export const LINKEDIN: string = ""; // company LinkedIn URL
+export const INSTAGRAM: string = ""; // Instagram URL
 
 export const TEAM = [
   {
