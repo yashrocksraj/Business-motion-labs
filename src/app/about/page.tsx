@@ -108,10 +108,10 @@ export default function AboutPage() {
           <p className="text-[10px] font-bold tracking-[0.25em] text-black/40">LEADERSHIP</p>
           <h2 className="mt-6 text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">The people accountable for your results.</h2>
         </Reveal>
-        <div className="mt-14 grid gap-4 md:grid-cols-2">
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {TEAM.map((m, i) => (
             <Reveal key={m.name} delay={i * 0.1}>
-              <div className="flex h-full gap-6 rounded-[28px] border border-black/[0.06] bg-white p-7">
+              <div className="flex h-full flex-col gap-6 rounded-[28px] border border-black/[0.06] bg-white p-7">
                 {m.photo ? (
                   <img src={m.photo} alt={m.name} className="h-24 w-24 shrink-0 rounded-2xl object-cover" />
                 ) : (

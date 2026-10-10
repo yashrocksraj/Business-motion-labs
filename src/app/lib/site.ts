@@ -33,6 +33,14 @@ export const TEAM = [
     photo: "",
     linkedin: "",
   },
+  {
+    name: "Siya Satwani",
+    role: "Human Resources & People",
+    email: "siya@businessmotionlabs.com",
+    bio: "Leads the people function: hiring, onboarding and training, and the culture and standards behind every team that works on your account.",
+    photo: "",
+    linkedin: "",
+  },
 ];
 
 /** Tools we build with or connect to. Names only, no logos. */
