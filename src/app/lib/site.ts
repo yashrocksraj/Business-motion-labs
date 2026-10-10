@@ -18,8 +18,6 @@ const unsplash = (id: string, w = 1600) =>
 export type Plan = {
   name: string;
   tagline: string;
-  setup: string;
-  monthly: string;
   features: string[];
   recommended?: boolean;
 };
@@ -48,8 +46,6 @@ const fitnessPlans = (s1: string, s2: string, s3: string, lapsed: string): Plan[
   {
     name: "Starter",
     tagline: s1,
-    setup: "$990",
-    monthly: "$149",
     features: [
       "Mobile landing page for your intro offer",
       "Online booking form and calendar",
@@ -60,8 +56,6 @@ const fitnessPlans = (s1: string, s2: string, s3: string, lapsed: string): Plan[
   {
     name: "Growth",
     tagline: s2,
-    setup: "$1,950",
-    monthly: "$349",
     recommended: true,
     features: [
       "Everything in Starter",
@@ -74,8 +68,6 @@ const fitnessPlans = (s1: string, s2: string, s3: string, lapsed: string): Plan[
   {
     name: "Pro",
     tagline: s3,
-    setup: "$3,500",
-    monthly: "$699",
     features: [
       "Everything in Growth",
       "Online sign-up and payments",
@@ -87,6 +79,10 @@ const fitnessPlans = (s1: string, s2: string, s3: string, lapsed: string): Plan[
 ];
 
 const commonFaq = (customers: string) => [
+  {
+    q: "How much does it cost?",
+    a: "It depends on the plan and the size of your business. After the free Growth Call you get a fixed price in writing: setup plus a monthly fee, no hidden extras.",
+  },
   {
     q: "How long does it take?",
     a: "Most projects are live in about 3 weeks. You'll spend around an hour with us in week one, and we handle the rest.",
@@ -132,7 +128,7 @@ export const INDUSTRIES: Record<string, Industry> = {
       { title: "Follow up", items: ["Instant reply to every enquiry", "Reminders so trials actually show up", "Win-back messages for lapsed members"] },
     ],
     valueLine:
-      "At $50 a month, one member is worth $600 a year. Around 10 extra members in a year cover the Growth plan.",
+      "At $50 a month, one member is worth $600 a year. A handful of extra members a month adds up fast.",
     plans: fitnessPlans("Trial Booster", "Member Engine", "Full Funnel", "cancelled members"),
     faq: commonFaq("members"),
   },
@@ -162,7 +158,7 @@ export const INDUSTRIES: Record<string, Industry> = {
       { title: "Follow up", items: ["Instant reply to every question", "Class reminders to cut no-shows", "'We miss you' messages after 2–3 weeks away"] },
     ],
     valueLine:
-      "At $100 a month, one student is worth $1,200 a year. About 5 extra regular students cover the Growth plan.",
+      "At $100 a month, one student is worth $1,200 a year. Every first-timer who becomes a regular adds up fast.",
     plans: fitnessPlans("Intro Offer Booster", "Student Engine", "Full Studio", "lapsed students"),
     faq: commonFaq("students"),
   },
@@ -192,28 +188,22 @@ export const INDUSTRIES: Record<string, Industry> = {
       { title: "Follow up", items: ["Reminders to cut no-shows", "'Time to rebook' messages", "Win-back offers after 60+ days away"] },
     ],
     valueLine:
-      "A regular client at $60 a visit, 8 visits a year, is worth $480. About 11 extra regulars cover the Growth plan.",
+      "A regular client at $60 a visit, 8 visits a year, is worth $480. Fewer no-shows and more rebookings add up fast.",
     plans: [
       {
         name: "Starter",
         tagline: "Book Online",
-        setup: "$790",
-        monthly: "$129",
         features: ["Mobile booking page", "Online booking with Fresha, Vagaro, Square or similar", "Instagram 'Book now' link", "Google Business Profile clean-up"],
       },
       {
         name: "Growth",
         tagline: "Full Chairs",
-        setup: "$1,650",
-        monthly: "$299",
         recommended: true,
         features: ["Everything in Starter", "Full website: services, prices, gallery", "Reminders to cut no-shows", "Rebooking reminders and review requests", "Monthly results report"],
       },
       {
         name: "Pro",
         tagline: "Loyal Clients",
-        setup: "$2,950",
-        monthly: "$599",
         features: ["Everything in Growth", "Win-back offers for lapsed clients", "Gift cards and packages online", "Birthday and seasonal offers", "Monthly strategy call"],
       },
     ],
@@ -245,28 +235,22 @@ export const INDUSTRIES: Record<string, Industry> = {
       { title: "Follow up", items: ["Booking reminders to cut no-shows", "Guest list for offers and events", "Win-back offers for guests who stopped coming"] },
     ],
     valueLine:
-      "A regular guest spending $40 a month is worth $480 a year. About 13 extra regulars cover the Growth plan, before any commission you save.",
+      "A regular guest spending $40 a month is worth $480 a year. Add the delivery-app commission you save on every direct order.",
     plans: [
       {
         name: "Starter",
         tagline: "Direct Orders",
-        setup: "$990",
-        monthly: "$149",
         features: ["Fast mobile menu page", "Direct online ordering or booking link", "Instagram 'Order / Book' links", "Google Business Profile clean-up"],
       },
       {
         name: "Growth",
         tagline: "Full Tables",
-        setup: "$1,950",
-        monthly: "$349",
         recommended: true,
         features: ["Everything in Starter", "Full website: menu, photos, events", "Table booking with reminders", "Guest list and review requests", "Monthly results report"],
       },
       {
         name: "Pro",
         tagline: "Regulars Club",
-        setup: "$3,200",
-        monthly: "$599",
         features: ["Everything in Growth", "Loyalty and win-back offers", "Birthday and event campaigns", "Landing pages for ads and catering", "Monthly strategy call"],
       },
     ],
@@ -298,28 +282,22 @@ export const INDUSTRIES: Record<string, Industry> = {
       { title: "Follow up", items: ["Instant reply to every enquiry", "Automatic follow-up on open quotes", "Service reminders to past customers"] },
     ],
     valueLine:
-      "At $350 a job, about 16 extra jobs in a year (1–2 a month) cover the Growth plan.",
+      "At $350 a job, just 1–2 extra booked jobs a month make a real difference over a year.",
     plans: [
       {
         name: "Starter",
         tagline: "Calls & Quotes",
-        setup: "$890",
-        monthly: "$149",
         features: ["Tap-to-call landing page", "Online quote request form", "Instant SMS/email reply to enquiries", "Google Business Profile clean-up"],
       },
       {
         name: "Growth",
         tagline: "Booked Jobs",
-        setup: "$1,750",
-        monthly: "$329",
         recommended: true,
         features: ["Everything in Starter", "Full website with service and area pages", "Missed-call text-back", "Quote follow-ups and review requests", "Monthly results report"],
       },
       {
         name: "Pro",
         tagline: "Full Pipeline",
-        setup: "$2,950",
-        monthly: "$599",
         features: ["Everything in Growth", "Online booking with deposits", "Service reminders to past customers", "Landing pages for ads", "Monthly strategy call"],
       },
     ],

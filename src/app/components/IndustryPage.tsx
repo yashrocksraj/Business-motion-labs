@@ -95,7 +95,7 @@ export default function IndustryPage({ data }: { data: Industry }) {
           </div>
           <p className="mt-10 max-w-3xl rounded-[20px] bg-white/[0.06] px-6 py-5 text-sm leading-6 text-white/70">
             <span className="font-bold text-white">What it&apos;s worth: </span>
-            {data.valueLine} <span className="text-white/40">(Example. We redo the maths with your own prices on the call.)</span>
+            {data.valueLine} <span className="text-white/40">(Example. We work it out with your own numbers on the call.)</span>
           </p>
         </div>
       </section>
@@ -122,11 +122,9 @@ export default function IndustryPage({ data }: { data: Industry }) {
                 )}
                 <h3 className="text-2xl font-medium tracking-[-0.03em]">{p.name}</h3>
                 <p className={`mt-1 text-sm ${p.recommended ? "text-white/50" : "text-black/45"}`}>{p.tagline}</p>
-                <p className="mt-8 text-5xl font-medium tracking-[-0.05em]">
-                  {p.monthly}
-                  <span className={`ml-1 text-base tracking-normal ${p.recommended ? "text-white/50" : "text-black/45"}`}>/ month</span>
+                <p className={`mt-6 text-sm ${p.recommended ? "text-white/60" : "text-black/55"}`}>
+                  One-time setup + simple monthly plan
                 </p>
-                <p className={`mt-2 text-sm ${p.recommended ? "text-white/60" : "text-black/55"}`}>+ {p.setup} one-time setup</p>
                 <ul className={`mt-8 grid flex-1 gap-3 text-sm leading-6 ${p.recommended ? "text-white/75" : "text-black/65"}`}>
                   {p.features.map((f) => (
                     <li key={f} className="flex gap-3">
@@ -141,11 +139,13 @@ export default function IndustryPage({ data }: { data: Industry }) {
               </div>
             ))}
           </div>
-          <p className="mt-8 max-w-3xl text-sm leading-6 text-black/45">
-            Prices in US dollars. 50% of setup to start, 50% at launch. Monthly plans have a 3-month minimum, then
-            month to month. Ad spend and third-party software (such as SMS credits) are paid by you directly.
-            <span className="font-medium text-black/70"> Founding-client offer: 50% off setup for our first clients, in return for a testimonial.</span>
-          </p>
+          <div className="mt-8 flex flex-col gap-4 rounded-[24px] border border-black/[0.06] bg-white p-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-2xl text-sm leading-6 text-black/55">
+              <span className="font-medium text-black/80">Pricing is shared on your free Growth Call.</span> Every business is
+              different, so we look at yours first, then give you one fixed price in writing. No surprises, no hidden extras.
+            </p>
+            <BookButton>GET YOUR PRICE</BookButton>
+          </div>
         </div>
       </section>
 
