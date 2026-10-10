@@ -45,7 +45,10 @@ export async function POST(request: Request) {
       service,
       projectDetails,
       budget,
+      formType,
     } = body;
+
+    const kind = escapeHtml(formType || "New Project Inquiry");
 
     // ---------------------------------------------------------
     // Required fields
@@ -81,7 +84,7 @@ export async function POST(request: Request) {
       to: ["yash@businessmotionlabs.com"],
       replyTo: email,
 
-      subject: `New Project Inquiry — ${safeName}${
+      subject: `${kind} — ${safeName}${
         safeBusinessName ? ` | ${safeBusinessName}` : ""
       }`,
 
@@ -89,7 +92,7 @@ export async function POST(request: Request) {
         <div style="font-family: Arial, sans-serif; max-width: 720px; margin: 0 auto; padding: 32px; color: #111827;">
 
           <h1 style="font-size: 28px; margin-bottom: 8px;">
-            New Project Inquiry
+            ${kind}
           </h1>
 
           <p style="color: #6b7280; margin-bottom: 32px;">

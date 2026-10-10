@@ -26,7 +26,7 @@ export default function IndustryPage({ data }: { data: Industry }) {
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
               <BookButton />
               <a
-                href="/#contact"
+                href="/audit"
                 className="inline-flex items-center gap-3 text-[10px] font-bold tracking-[0.14em] text-black/60 hover:text-black"
               >
                 GET A FREE WEBSITE AUDIT <span aria-hidden>↗</span>
@@ -209,7 +209,7 @@ export default function IndustryPage({ data }: { data: Industry }) {
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
             <BookButton dark={false} />
-            <a href="/#contact" className="text-[10px] font-bold tracking-[0.14em] text-white/60 hover:text-white">
+            <a href="/audit" className="text-[10px] font-bold tracking-[0.14em] text-white/60 hover:text-white">
               OR SEND US YOUR WEBSITE FOR A FREE AUDIT ↗
             </a>
           </div>

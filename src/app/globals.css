@@ -22,5 +22,31 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes bml-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.bml-marquee {
+  animation: bml-marquee 40s linear infinite;
+}
+
+.bml-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bml-marquee { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+input[type="range"].bml-range {
+  accent-color: #16b886;
 }

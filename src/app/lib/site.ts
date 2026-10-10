@@ -20,14 +20,14 @@ export const TEAM = [
   {
     name: "Yash Raj",
     role: "Technology & Development",
-    bio: "Builds the websites, booking flows and automations, and makes sure everything works on a real phone before it goes live.",
+    bio: "Leads product and engineering: websites, booking and ordering flows, integrations and automation, and the quality bar every launch has to clear.",
     photo: "", // e.g. "/team/yash.jpg" once a real photo is added to /public/team
     linkedin: "",
   },
   {
     name: "Manas Dang",
     role: "Business Development & Operations",
-    bio: "Runs the Growth Calls and audits, and is your day-to-day contact from kick-off to monthly reports.",
+    bio: "Leads client strategy and delivery: audits, Growth Calls, project management and the monthly reporting that keeps every engagement accountable.",
     photo: "",
     linkedin: "",
   },
@@ -62,7 +62,7 @@ export const HOME_FAQ: { category: string; items: { q: string; a: string }[] }[]
   {
     category: "Working with us",
     items: [
-      { q: "Where is your team, and what about time zones?", a: "Our team is based in India and works with clients in the US, UK, Canada and Australia. We schedule calls in your time zone and reply to messages within one working day." },
+      { q: "Where are you based, and what about time zones?", a: "Our delivery team is based in India and works with clients across the US, UK, Canada and Australia. Calls are scheduled in your time zone, and every message gets a reply within one working day." },
       { q: "How long until it's live?", a: "Most projects go live in about 3 weeks. You'll need around an hour with us in the first week; we handle the rest." },
       { q: "Do I own my website and data?", a: "Yes. Your website, domain, customer list and accounts are yours. If you ever leave, we hand everything over." },
       { q: "Can you work with the tools I already use?", a: "Usually, yes. We connect to common booking, ordering, payment and calendar tools rather than asking you to switch." },
@@ -73,13 +73,15 @@ export const HOME_FAQ: { category: string; items: { q: string; a: string }[] }[]
     items: [
       { q: "Do you guarantee results?", a: "No honest agency can guarantee a number of new customers. What we do guarantee is a clear plan, work delivered as agreed, and a monthly report so you can see exactly what's happening." },
       { q: "How will I know it's working?", a: "Each month you get a short report: visits, enquiries, bookings or calls, reviews, and what we're improving next." },
-      { q: "Do you have case studies?", a: "We're a new agency, so we're working with our first founding clients now. Their results will be published here, with their permission, as soon as they're live." },
+      { q: "Can I see examples of your work?", a: "Yes. Our Work page shows concept projects for each industry we serve, so you can see exactly how we approach a booking flow, an ordering system or a quote form. Client results are published there with each client's permission." },
     ],
   },
 ];
 
-export const bookHref = BOOKING_URL || "/#contact";
-export const isExternalBooking = BOOKING_URL !== "";
+/** Every "Book a call" button goes to /book, which shows the calendar (or a request form until BOOKING_URL is set). */
+export const bookHref = "/book";
+export const auditHref = "/audit";
+export const isExternalBooking = false;
 
 const unsplash = (id: string, w = 1600) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
@@ -380,4 +382,103 @@ export const INDUSTRY_LIST = [
   INDUSTRIES.salons,
   INDUSTRIES.restaurants,
   INDUSTRIES.plumbers,
+];
+
+/* ---------- Concept projects (Work page). Fictional brands, clearly labelled as concepts. ---------- */
+export type Concept = {
+  slug: string;
+  brand: string;
+  industry: string;
+  service: string;
+  mock: "trial" | "schedule" | "salon" | "order" | "quote" | "dashboard";
+  summary: string;
+  problem: string;
+  solution: string[];
+  outcome: string;
+  image: string;
+};
+
+export const CONCEPTS: Concept[] = [
+  {
+    slug: "ironpulse", brand: "IronPulse Fitness", industry: "Gyms & Fitness", service: "Trial booking funnel",
+    mock: "trial",
+    summary: "A free-trial funnel that books, confirms and reminds, without anyone at the front desk.",
+    problem: "Visitors liked the gym but had to call or walk in to try it. Evening enquiries waited until the next day.",
+    solution: ["One-tap 'Book a free trial' on every page", "Live class and slot picker", "Instant SMS + email confirmation", "Reminder 2 hours before, and a follow-up after the visit"],
+    outcome: "Designed to turn after-hours visitors into booked trials and cut no-shows.",
+    image: unsplash("photo-1517836357463-d25dfeac3438", 1200),
+  },
+  {
+    slug: "lotusflow", brand: "Lotus Flow Studio", industry: "Yoga & Pilates", service: "Class schedule & intro offer",
+    mock: "schedule",
+    summary: "A schedule that's actually readable on a phone, with an intro offer built into every class.",
+    problem: "The timetable was a PDF. First-timers couldn't tell which class suited them, so they never booked.",
+    solution: ["Mobile weekly schedule with level filters", "Intro-pass offer on first booking", "Waitlist with automatic spot release", "'We miss you' message after two weeks away"],
+    outcome: "Designed to make the first class easy and the second one automatic.",
+    image: unsplash("photo-1761034114082-c2d63456a82a", 1200),
+  },
+  {
+    slug: "velvet", brand: "Velvet & Co. Salon", industry: "Salons & Beauty", service: "Online booking & reminders",
+    mock: "salon",
+    summary: "Book a stylist, service and time in under a minute, with reminders that protect the diary.",
+    problem: "Bookings only happened by phone during opening hours, and no-shows left gaps every week.",
+    solution: ["Service menu with prices and durations", "Stylist and time-slot picker", "Reminders 24 hours and 2 hours before", "'Time to rebook' message after 5 weeks"],
+    outcome: "Designed to fill chairs outside opening hours and reduce no-shows.",
+    image: unsplash("photo-1580618672591-eb180b1a973f", 1200),
+  },
+  {
+    slug: "harbor", brand: "Harbor Street Kitchen", industry: "Restaurants & Cafés", service: "Direct ordering & table booking",
+    mock: "order",
+    summary: "Commission-free ordering and table booking, with a guest list the restaurant owns.",
+    problem: "Most orders came through delivery apps that took a large commission and kept the customer details.",
+    solution: ["Fast mobile menu with photos", "Direct pickup and delivery ordering", "Table booking with reminders", "Guest list for offers and events"],
+    outcome: "Designed to move repeat orders from apps to the restaurant's own channel.",
+    image: unsplash("photo-1466978913421-dad2ebd01d17", 1200),
+  },
+  {
+    slug: "rapidflow", brand: "RapidFlow Plumbing", industry: "Home Services", service: "Calls, quotes & missed-call text-back",
+    mock: "quote",
+    summary: "Every caller gets an answer, even when the plumber is under a sink.",
+    problem: "Calls went unanswered during jobs, and those customers simply rang the next plumber on Google.",
+    solution: ["Sticky tap-to-call button", "Two-step quote request with photo upload", "Automatic text-back for missed calls", "Quote follow-up after 48 hours"],
+    outcome: "Designed to capture the jobs that used to be lost to voicemail.",
+    image: unsplash("photo-1676210134188-4c05dd172f89", 1200),
+  },
+  {
+    slug: "pulse-report", brand: "Growth Report", industry: "All industries", service: "Monthly reporting",
+    mock: "dashboard",
+    summary: "One page that shows an owner what happened this month, in plain English.",
+    problem: "Owners had analytics accounts they never opened, and no idea which changes were working.",
+    solution: ["Visits, enquiries, bookings and calls in one view", "Review count and rating trend", "What changed this month, and why", "Next month's priorities"],
+    outcome: "Designed so every client can see progress in two minutes.",
+    image: unsplash("photo-1551434678-e076c223a692", 1200),
+  },
+];
+
+/* ---------- Careers. Edit roles here; remove any you are not hiring for. ---------- */
+export const ROLES = [
+  {
+    title: "Sales Development Representative (US & UK markets)",
+    type: "Full-time · Remote or Kanpur · Evening shift (US/UK hours)",
+    summary: "Research local businesses, run personalised outreach, book Growth Calls and keep the CRM spotless.",
+    needs: ["Excellent spoken and written English", "Comfortable on calls with business owners", "Organised and target-driven"],
+  },
+  {
+    title: "Web Developer (Next.js / React)",
+    type: "Full-time · Remote",
+    summary: "Build fast, mobile-first websites, booking and ordering flows, and the integrations behind them.",
+    needs: ["Strong React and TypeScript", "An eye for clean UI on small screens", "Experience with APIs and third-party integrations"],
+  },
+  {
+    title: "Digital Marketing & Local SEO Executive",
+    type: "Full-time · Remote or Kanpur",
+    summary: "Own Google Business Profiles, local SEO, review programmes and monthly client reports.",
+    needs: ["Hands-on local SEO experience", "Comfort with GA4 and Search Console", "Clear written communication"],
+  },
+  {
+    title: "Business Development Intern",
+    type: "Internship · 3–6 months · Remote",
+    summary: "Learn agency sales from the ground up: lead research, audits, outreach and call preparation.",
+    needs: ["Curious and quick to learn", "Good English", "Final-year students and recent graduates welcome"],
+  },
 ];

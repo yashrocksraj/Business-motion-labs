@@ -6,6 +6,7 @@ import {
   LINKEDIN,
   PHONE,
   WHATSAPP,
+  auditHref,
   bookHref,
   isExternalBooking,
 } from "../lib/site";
@@ -41,10 +42,11 @@ export function SiteHeader({ pricingHref = "/gyms#pricing" }: { pricingHref?: st
   const links: [string, string][] = [
     ["Industries", "/#industries"],
     ["Services", "/#services"],
+    ["Work", "/work"],
     ["Plans", pricingHref],
-    ["About", "/#about"],
+    ["About", "/about"],
+    ["Careers", "/careers"],
     ["FAQ", "/#faq"],
-    ["Contact", "/#contact"],
   ];
   return (
     <header className="fixed left-0 right-0 top-0 z-50">
@@ -58,7 +60,7 @@ export function SiteHeader({ pricingHref = "/gyms#pricing" }: { pricingHref?: st
               BUSINESS MOTION LABS
             </span>
           </a>
-          <nav className="hidden items-center gap-7 lg:flex">
+          <nav className="hidden items-center gap-6 xl:flex">
             {links.map(([label, href]) => (
               <a key={label} href={href} className="text-xs text-black/50 transition hover:text-black">
                 {label}
@@ -67,13 +69,19 @@ export function SiteHeader({ pricingHref = "/gyms#pricing" }: { pricingHref?: st
           </nav>
           <div className="flex items-center gap-2">
             <a
+              href={auditHref}
+              className="hidden rounded-full border border-black/15 px-4 py-2.5 text-[10px] font-bold tracking-[0.12em] transition hover:border-black/40 sm:inline-block"
+            >
+              FREE AUDIT
+            </a>
+            <a
               href={bookHref}
               {...bookLinkProps}
               className="rounded-full bg-[#071528] px-4 py-2.5 text-[9px] font-bold tracking-[0.12em] text-white transition hover:bg-[#12335d] sm:px-5 sm:text-[10px]"
             >
               BOOK A FREE CALL
             </a>
-            <details className="group lg:hidden">
+            <details className="group xl:hidden">
               <summary
                 aria-label="Open menu"
                 className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-black/10 [&::-webkit-details-marker]:hidden"
@@ -83,7 +91,7 @@ export function SiteHeader({ pricingHref = "/gyms#pricing" }: { pricingHref?: st
               </summary>
               <div className="absolute left-0 right-0 top-[calc(100%+8px)] rounded-3xl border border-black/10 bg-[#f7f8f5] p-4 shadow-xl">
                 <div className="grid gap-1">
-                  {links.map(([label, href]) => (
+                  {[...links, ["Free website audit", auditHref] as [string, string], ["Contact", "/#contact"] as [string, string]].map(([label, href]) => (
                     <a
                       key={label}
                       href={href}
@@ -148,14 +156,17 @@ export function SiteFooter() {
           <p className="text-[9px] font-bold tracking-[0.2em] text-white/40">GET STARTED</p>
           <ul className="mt-4 grid gap-2 text-sm text-white/70">
             <li><a href={bookHref} className="hover:text-white">Book a free Growth Call</a></li>
-            <li><a href="/#contact" className="hover:text-white">Get a free website audit</a></li>
+            <li><a href={auditHref} className="hover:text-white">Get a free website audit</a></li>
+            <li><a href="/work" className="hover:text-white">Our work</a></li>
             <li><a href="/#faq" className="hover:text-white">Questions & answers</a></li>
+            <li><a href="/#contact" className="hover:text-white">Contact us</a></li>
           </ul>
         </div>
         <div>
           <p className="text-[9px] font-bold tracking-[0.2em] text-white/40">COMPANY</p>
           <ul className="mt-4 grid gap-2 text-sm text-white/70">
-            <li><a href="/#about" className="hover:text-white">About us</a></li>
+            <li><a href="/about" className="hover:text-white">About us</a></li>
+            <li><a href="/careers" className="hover:text-white">Careers</a></li>
             <li><a href="/privacy" className="hover:text-white">Privacy policy</a></li>
             {LINKEDIN && <li><a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="hover:text-white">LinkedIn</a></li>}
             {INSTAGRAM && <li><a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram</a></li>}

@@ -1,8 +1,7 @@
 import ContactForm from "./components/ContactForm";
+import { ConceptShowcase, GrowthCalculator, HeroPhone, IndustryExplorer, Reveal } from "./components/Interactive";
 import { BookButton, SiteFooter, SiteHeader, WhatsAppButton } from "./components/SiteChrome";
-import { HOME_FAQ, INDUSTRY_LIST, TEAM, TOOLS } from "./lib/site";
-
-const photo = (id: string, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+import { HOME_FAQ, TOOLS, auditHref, bookHref } from "./lib/site";
 
 const services = [
   { n: "01", title: "Websites that work on a phone", text: "Fast, clear pages that show what you offer, your prices or menu, your location and one obvious next step." },
@@ -23,14 +22,16 @@ const beforeAfter: [string, string][] = [
 
 export default function Home() {
   return (
-    <main id="top" className="min-h-screen bg-[#f7f8f5] text-[#071528]">
+    <main id="top" className="min-h-screen overflow-x-hidden bg-[#f7f8f5] text-[#071528]">
       <SiteHeader />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto grid max-w-[1500px] gap-12 px-6 pb-16 pt-36 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10 lg:pb-24 lg:pt-44">
-          <div>
-            <p className="text-[10px] font-bold tracking-[0.25em] text-black/40">
+      <section className="relative">
+        <div className="pointer-events-none absolute right-[-10%] top-[-10%] h-[620px] w-[620px] rounded-full bg-[#16b886]/10 blur-3xl" />
+        <div className="relative mx-auto grid max-w-[1500px] gap-14 px-6 pb-16 pt-36 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10 lg:pb-24 lg:pt-44">
+          <Reveal>
+            <p className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-[10px] font-bold tracking-[0.2em] text-black/50">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-[#16b886]" />
               WEBSITES · ONLINE BOOKING · AUTOMATIC FOLLOW-UP
             </p>
             <h1 className="mt-8 text-[clamp(2.9rem,6.4vw,6.6rem)] font-medium leading-[0.92] tracking-[-0.06em]">
@@ -38,17 +39,17 @@ export default function Home() {
               <span className="text-black/25">who already find you online.</span>
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-8 text-black/60">
-              We help gyms, studios, salons, restaurants and home-service businesses turn website visitors into
-              bookings, orders and calls, with a fast website, online booking and replies that go out while you
-              work.
+              Business Motion Labs helps gyms, studios, salons, restaurants and home-service businesses turn website
+              visitors into bookings, orders and calls, with a fast website, online booking and replies that go out
+              while you work.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
               <BookButton />
               <a
-                href="#contact"
-                className="inline-flex items-center gap-3 text-[10px] font-bold tracking-[0.14em] text-black/60 hover:text-black"
+                href={auditHref}
+                className="inline-flex items-center justify-center gap-3 rounded-full border border-black/15 bg-white px-6 py-4 text-[10px] font-bold tracking-[0.14em] transition hover:border-black/40"
               >
-                GET A FREE WEBSITE AUDIT <span aria-hidden>↗</span>
+                GET A FREE AUDIT REPORT <span aria-hidden>↗</span>
               </a>
             </div>
             <ul className="mt-10 grid max-w-xl grid-cols-2 gap-x-6 gap-y-3 text-sm text-black/60 sm:grid-cols-4 sm:gap-x-4">
@@ -59,99 +60,80 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-          </div>
-          <figure className="relative min-h-[420px] overflow-hidden rounded-[28px] bg-[#071528] lg:min-h-[600px]">
-            <img
-              src={photo("photo-1556742393-d75f468bfcb0")}
-              alt="Café owner checking orders on a tablet at the counter"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#071528]/85 via-[#071528]/10 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-8">
-              <p className="text-[9px] font-bold tracking-[0.22em] text-white/60">WHILE YOU&apos;RE BUSY RUNNING THE BUSINESS</p>
-              <p className="mt-3 max-w-md text-2xl font-medium leading-tight tracking-[-0.03em]">
-                Bookings come in, enquiries get answered, and reminders go out on their own.
-              </p>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="relative">
+              <div className="absolute inset-x-6 bottom-10 top-16 overflow-hidden rounded-[32px] bg-[#071528]">
+                <img
+                  src="https://images.unsplash.com/photo-1556742393-d75f468bfcb0?auto=format&fit=crop&w=1400&q=80"
+                  alt="Café owner checking orders on a tablet at the counter"
+                  className="h-full w-full object-cover opacity-60"
+                />
+              </div>
+              <div className="relative py-6">
+                <HeroPhone />
+              </div>
             </div>
-          </figure>
+          </Reveal>
         </div>
       </section>
 
-      {/* INDUSTRIES */}
-      <section id="industries" className="scroll-mt-24 border-y border-black/[0.06] bg-white">
-        <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">WHO WE HELP</p>
-              <h2 className="mt-6 max-w-3xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
-                Built for businesses that live on bookings and repeat customers.
-              </h2>
-            </div>
-            <p className="max-w-sm text-sm leading-6 text-black/55">
-              Pick your industry to see where businesses like yours lose customers online, and how we fix it.
-            </p>
-          </div>
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {INDUSTRY_LIST.map((i) => (
-              <a
-                key={i.slug}
-                href={`/${i.slug}`}
-                className="group relative block min-h-[320px] overflow-hidden rounded-[24px] bg-[#071528] text-white"
-              >
-                <img
-                  src={i.image.replace("w=1600", "w=1000")}
-                  alt={i.imageAlt}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover opacity-75 transition duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071528] via-[#071528]/40 to-transparent" />
-                <div className="relative flex h-full min-h-[320px] flex-col justify-end p-6">
-                  <h3 className="text-2xl font-medium tracking-[-0.03em]">{i.name}</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/70">{i.card}</p>
-                  <span className="mt-4 text-[10px] font-bold tracking-[0.16em] text-white/80 group-hover:text-white">
-                    SEE HOW WE HELP →
-                  </span>
-                </div>
-              </a>
+      {/* TOOLS MARQUEE */}
+      <section className="border-y border-black/[0.06] bg-white py-8" aria-label="Tools we build with and connect to">
+        <p className="mb-5 text-center text-[10px] font-bold tracking-[0.25em] text-black/35">TOOLS WE BUILD WITH AND CONNECT TO</p>
+        <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+          <ul className="bml-marquee flex w-max gap-3">
+            {[...TOOLS, ...TOOLS].map((t, i) => (
+              <li key={i} className="whitespace-nowrap rounded-full border border-black/[0.08] bg-[#f7f8f5] px-5 py-2.5 text-sm text-black/60">
+                {t}
+              </li>
             ))}
-            <a
-              href="#contact"
-              className="flex min-h-[320px] flex-col justify-end rounded-[24px] border border-black/[0.08] bg-[#f7f8f5] p-6 transition hover:bg-[#eef1ec]"
-            >
-              <h3 className="text-2xl font-medium tracking-[-0.03em]">Another local business?</h3>
-              <p className="mt-2 text-sm leading-6 text-black/55">
-                Clinics, studios, trades and other appointment-based businesses: send us your website and we&apos;ll
-                tell you honestly whether we can help.
-              </p>
-              <span className="mt-4 text-[10px] font-bold tracking-[0.16em] text-black/70">ASK FOR A FREE AUDIT →</span>
-            </a>
+          </ul>
+        </div>
+      </section>
+
+      {/* INDUSTRY EXPLORER */}
+      <section id="industries" className="scroll-mt-24 bg-[#f7f8f5]">
+        <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
+          <Reveal>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">WHO WE HELP</p>
+            <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
+              Pick your industry. <span className="text-black/25">See where customers slip away.</span>
+            </h2>
+          </Reveal>
+          <div className="mt-12">
+            <IndustryExplorer />
           </div>
         </div>
       </section>
 
       {/* BEFORE / AFTER */}
-      <section className="bg-[#f7f8f5]">
+      <section className="bg-white">
         <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
-          <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">WHAT CHANGES FOR YOUR CUSTOMERS</p>
-          <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
-            Small gaps lose customers every day. <span className="text-black/25">We close them.</span>
-          </h2>
-          <div className="mt-14 overflow-hidden rounded-[28px] border border-black/[0.06] bg-white">
+          <Reveal>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">WHAT CHANGES FOR YOUR CUSTOMERS</p>
+            <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
+              Small gaps lose customers every day. <span className="text-black/25">We close them.</span>
+            </h2>
+          </Reveal>
+          <div className="mt-14 overflow-hidden rounded-[28px] border border-black/[0.06] bg-[#f7f8f5]">
             <div className="hidden grid-cols-2 border-b border-black/[0.06] text-[10px] font-bold tracking-[0.2em] md:grid">
               <p className="px-8 py-5 text-[#b4232a]">TODAY</p>
-              <p className="border-l border-black/[0.06] px-8 py-5 text-[#0f8a65]">WITH BUSINESS MOTION LABS</p>
+              <p className="border-l border-black/[0.06] bg-white px-8 py-5 text-[#0f8a65]">WITH BUSINESS MOTION LABS</p>
             </div>
-            {beforeAfter.map(([before, after]) => (
-              <div key={before} className="grid border-b border-black/[0.06] last:border-b-0 md:grid-cols-2">
-                <p className="px-6 py-5 text-base leading-7 text-black/55 md:px-8">
-                  <span className="mr-2 text-[#b4232a]" aria-hidden>✕</span>
-                  {before}
-                </p>
-                <p className="border-t border-black/[0.06] px-6 py-5 text-base leading-7 md:border-l md:border-t-0 md:px-8">
-                  <span className="mr-2 text-[#16b886]" aria-hidden>✓</span>
-                  {after}
-                </p>
-              </div>
+            {beforeAfter.map(([before, after], i) => (
+              <Reveal key={before} delay={i * 0.05}>
+                <div className="group grid border-b border-black/[0.06] transition hover:bg-white md:grid-cols-2">
+                  <p className="px-6 py-5 text-base leading-7 text-black/50 md:px-8">
+                    <span className="mr-2 text-[#b4232a]" aria-hidden>✕</span>
+                    {before}
+                  </p>
+                  <p className="border-t border-black/[0.06] bg-white px-6 py-5 text-base leading-7 md:border-l md:border-t-0 md:px-8">
+                    <span className="mr-2 text-[#16b886]" aria-hidden>✓</span>
+                    {after}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -160,24 +142,53 @@ export default function Home() {
       {/* SERVICES */}
       <section id="services" className="scroll-mt-24 bg-[#071528] text-white">
         <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
-          <p className="text-[10px] font-bold tracking-[0.25em] text-white/40">WHAT WE DO</p>
-          <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
-            One team for your website, bookings and follow-up.
-          </h2>
+          <Reveal>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-white/40">WHAT WE DO</p>
+            <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
+              One partner for your website, bookings and follow-up.
+            </h2>
+          </Reveal>
           <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <div key={s.n} className="rounded-[24px] border border-white/10 bg-white/[0.04] p-7">
-                <span className="text-[10px] font-bold tracking-[0.2em] text-white/35">{s.n}</span>
-                <h3 className="mt-4 text-2xl font-medium tracking-[-0.03em]">{s.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/65">{s.text}</p>
-              </div>
+            {services.map((s, i) => (
+              <Reveal key={s.n} delay={(i % 3) * 0.08}>
+                <div className="group h-full rounded-[24px] border border-white/10 bg-white/[0.04] p-7 transition duration-300 hover:-translate-y-1 hover:border-[#16b886]/50 hover:bg-white/[0.07]">
+                  <span className="text-[10px] font-bold tracking-[0.2em] text-white/35 transition group-hover:text-[#16b886]">{s.n}</span>
+                  <h3 className="mt-4 text-2xl font-medium tracking-[-0.03em]">{s.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/65">{s.text}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
-          <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <BookButton dark={false} />
-            <a href="/gyms#pricing" className="text-[10px] font-bold tracking-[0.14em] text-white/60 hover:text-white">
-              SEE WHAT&apos;S IN EACH PLAN ↗
-            </a>
+        </div>
+      </section>
+
+      {/* WORK */}
+      <section id="work" className="scroll-mt-24 border-t border-white/10 bg-[#0b1d34] text-white">
+        <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
+          <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <Reveal>
+              <p className="text-[10px] font-bold tracking-[0.25em] text-white/40">OUR WORK · CONCEPT PROJECTS</p>
+              <h2 className="mt-6 max-w-3xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
+                Don&apos;t just read about it. <span className="text-white/30">Try it.</span>
+              </h2>
+            </Reveal>
+            <a href="/work" className="text-[10px] font-bold tracking-[0.16em] text-white/60 hover:text-white">SEE ALL PROJECTS →</a>
+          </div>
+          <ConceptShowcase />
+        </div>
+      </section>
+
+      {/* CALCULATOR */}
+      <section className="bg-[#f7f8f5]">
+        <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
+          <Reveal>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">WHAT IT COULD BE WORTH</p>
+            <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
+              Move the sliders. <span className="text-black/25">See the difference a better journey makes.</span>
+            </h2>
+          </Reveal>
+          <div className="mt-12">
+            <GrowthCalculator />
           </div>
         </div>
       </section>
@@ -185,120 +196,91 @@ export default function Home() {
       {/* PROCESS */}
       <section id="process" className="scroll-mt-24 bg-white">
         <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
-          <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">HOW IT WORKS</p>
-          <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
-            From first call to live in about three weeks.
-          </h2>
-          <ol className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <Reveal>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">HOW IT WORKS</p>
+            <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
+              From first call to live in about three weeks.
+            </h2>
+          </Reveal>
+          <div className="relative mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[
-              ["Free audit & Growth Call", "We check your website, Google profile and booking journey, then walk you through the three biggest fixes on a 20-minute call."],
+              ["Free audit & Growth Call", "We check your website, Google profile and booking journey, then walk you through the three biggest fixes."],
               ["Plan & fixed price", "You get a clear plan and one fixed price in writing. Nothing starts until you're happy with it."],
               ["Build & launch", "We build, connect your booking and payment tools, test every step on a real phone, and launch."],
               ["Improve every month", "We watch what visitors do, fix what's slow, and send you a plain-English report."],
             ].map(([t, d], i) => (
-              <li key={t} className="rounded-[24px] bg-[#f7f8f5] p-7">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071528] text-sm font-bold text-white">{i + 1}</span>
-                <h3 className="mt-6 text-xl font-medium tracking-[-0.03em]">{t}</h3>
-                <p className="mt-3 text-sm leading-6 text-black/55">{d}</p>
-              </li>
+              <Reveal key={t} delay={i * 0.08}>
+                <div className="h-full rounded-[24px] bg-[#f7f8f5] p-7 transition hover:bg-[#eef1ec]">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071528] text-sm font-bold text-white">{i + 1}</span>
+                  <h3 className="mt-6 text-xl font-medium tracking-[-0.03em]">{t}</h3>
+                  <p className="mt-3 text-sm leading-6 text-black/55">{d}</p>
+                </div>
+              </Reveal>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
-      {/* ABOUT / TEAM */}
+      {/* ABOUT TEASER */}
       <section id="about" className="scroll-mt-24 bg-[#f7f8f5]">
-        <div className="mx-auto grid max-w-[1500px] gap-14 px-6 py-24 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:py-32">
-          <div>
-            <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">ABOUT US</p>
-            <h2 className="mt-6 text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
-              A small team. <span className="text-black/25">You talk to the people doing the work.</span>
+        <div className="mx-auto grid max-w-[1500px] gap-12 px-6 py-24 lg:grid-cols-2 lg:items-center lg:px-10 lg:py-32">
+          <Reveal>
+            <div className="relative h-[380px] overflow-hidden rounded-[28px] sm:h-[460px]">
+              <img
+                src="https://images.unsplash.com/photo-1690378820474-b468b8ee64d3?auto=format&fit=crop&w=1400&q=80"
+                alt="A team working together around a table with laptops"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">ABOUT BUSINESS MOTION LABS</p>
+            <h2 className="mt-6 text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-5xl">
+              A digital growth studio for businesses that run on bookings.
             </h2>
-            <div className="mt-8 grid gap-5 text-base leading-7 text-black/60">
-              <p>
-                Business Motion Labs is a young, two-founder agency based in India, working with local businesses in
-                the US, UK, Canada and Australia. We started it because so many good businesses lose customers to
-                small, fixable problems online: a slow page, a hidden phone number, an enquiry nobody answered.
-              </p>
-              <p>
-                We&apos;re building our first client stories right now. That means you get both founders on your
-                project, founding-client terms, and a team that has every reason to make your results visible.
-              </p>
-            </div>
-          </div>
-          <div className="grid content-start gap-4 sm:grid-cols-2">
-            {TEAM.map((m) => (
-              <div key={m.name} className="rounded-[24px] border border-black/[0.06] bg-white p-7">
-                {m.photo ? (
-                  <img src={m.photo} alt={m.name} className="h-20 w-20 rounded-full object-cover" />
-                ) : (
-                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-[#071528] text-2xl font-medium text-white">
-                    {m.name.split(" ").map((p) => p[0]).join("")}
-                  </span>
-                )}
-                <h3 className="mt-6 text-2xl font-medium tracking-[-0.03em]">{m.name}</h3>
-                <p className="mt-1 text-[10px] font-bold tracking-[0.18em] text-black/40">{m.role.toUpperCase()}</p>
-                <p className="mt-4 text-sm leading-6 text-black/60">{m.bio}</p>
-                {m.linkedin && (
-                  <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-sm font-medium underline underline-offset-4">
-                    LinkedIn
-                  </a>
-                )}
-              </div>
-            ))}
-            <div className="rounded-[24px] bg-[#071528] p-7 text-white sm:col-span-2">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-white/45">OUR PROMISES</p>
-              <ul className="mt-5 grid gap-3 text-sm leading-6 text-white/75 sm:grid-cols-2">
-                {[
-                  "A reply to every message within one working day",
-                  "One fixed price in writing before any work starts",
-                  "Your website, domain and customer data stay yours",
-                  "Calls scheduled in your time zone",
-                ].map((t) => (
-                  <li key={t} className="flex gap-3"><span className="text-[#16b886]" aria-hidden>✓</span>{t}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TOOLS */}
-      <section className="border-y border-black/[0.06] bg-white">
-        <div className="mx-auto max-w-[1500px] px-6 py-16 lg:px-10">
-          <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">TOOLS WE BUILD WITH AND CONNECT TO</p>
-          <ul className="mt-8 flex flex-wrap gap-2">
-            {TOOLS.map((t) => (
-              <li key={t} className="rounded-full border border-black/[0.08] bg-[#f7f8f5] px-4 py-2 text-sm text-black/65">
-                {t}
-              </li>
-            ))}
-          </ul>
+            <p className="mt-6 text-lg leading-8 text-black/60">
+              Strategy, design, engineering and automation under one roof, serving clients across the US, UK,
+              Canada and Australia, with calls in your time zone and one accountable point of contact.
+            </p>
+            <ul className="mt-8 grid gap-3 text-sm text-black/65 sm:grid-cols-2">
+              {[
+                "A reply to every message within one working day",
+                "One fixed price in writing before work starts",
+                "Your website, domain and data stay yours",
+                "A plain-English report every month",
+              ].map((t) => (
+                <li key={t} className="flex gap-3"><span className="text-[#16b886]" aria-hidden>✓</span>{t}</li>
+              ))}
+            </ul>
+            <a href="/about" className="mt-8 inline-block text-[10px] font-bold tracking-[0.16em] text-black/70 hover:text-black">
+              MORE ABOUT US →
+            </a>
+          </Reveal>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="scroll-mt-24 bg-[#f7f8f5]">
+      <section id="faq" className="scroll-mt-24 bg-white">
         <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-[0.6fr_1.4fr]">
-            <div>
+            <Reveal>
               <p className="text-[10px] font-bold tracking-[0.25em] text-black/35">QUESTIONS & ANSWERS</p>
               <h2 className="mt-6 text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">Straight answers.</h2>
               <p className="mt-6 max-w-sm text-base leading-7 text-black/55">
-                Can&apos;t find what you&apos;re looking for? Ask us on a free Growth Call, or write to us through the
-                form below.
+                Can&apos;t find what you&apos;re looking for? Ask us on a free Growth Call, or send us a message below.
               </p>
-            </div>
+            </Reveal>
             <div className="grid gap-10">
               {HOME_FAQ.map((group) => (
                 <div key={group.category}>
                   <h3 className="text-[10px] font-bold tracking-[0.2em] text-black/40">{group.category.toUpperCase()}</h3>
                   <div className="mt-4 grid gap-3">
                     {group.items.map((f) => (
-                      <details key={f.q} className="group rounded-[20px] border border-black/[0.06] bg-white p-6">
+                      <details key={f.q} className="group rounded-[20px] border border-black/[0.06] bg-[#f7f8f5] p-6 transition open:bg-white open:shadow-sm">
                         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-medium tracking-[-0.02em] [&::-webkit-details-marker]:hidden">
                           {f.q}
-                          <span className="shrink-0 text-xl text-black/30 transition group-open:rotate-45" aria-hidden>+</span>
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-black/10 text-black/40 transition group-open:rotate-45 group-open:bg-[#071528] group-open:text-white" aria-hidden>+</span>
                         </summary>
                         <p className="mt-4 text-base leading-7 text-black/60">{f.a}</p>
                       </details>
@@ -311,25 +293,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GROWTH CALL */}
+      {/* TWO WAYS TO START */}
       <section className="bg-[#071528] text-white">
-        <div className="mx-auto grid max-w-[1500px] gap-10 px-6 py-24 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:px-10 lg:py-32">
-          <div>
-            <p className="text-[10px] font-bold tracking-[0.25em] text-white/40">FREE GROWTH CALL</p>
-            <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-7xl">
-              See what your website is costing you. <span className="text-white/30">In 20 minutes.</span>
+        <div className="mx-auto max-w-[1500px] px-6 py-24 lg:px-10 lg:py-32">
+          <Reveal>
+            <p className="text-[10px] font-bold tracking-[0.25em] text-white/40">TWO WAYS TO START</p>
+            <h2 className="mt-6 max-w-4xl text-4xl font-medium leading-[1] tracking-[-0.05em] sm:text-6xl">
+              Talk it through, or get the report first.
             </h2>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-white/65">
-              We review your website, Google profile and booking journey before the call, then show you the three
-              changes that would bring in the most customers. Free, no pressure. Slots are shown in your own time
-              zone.
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 lg:items-end">
-            <BookButton dark={false} />
-            <a href="#contact" className="text-[10px] font-bold tracking-[0.14em] text-white/60 hover:text-white">
-              OR SEND US YOUR WEBSITE FOR A FREE AUDIT ↓
-            </a>
+          </Reveal>
+          <div className="mt-14 grid gap-4 lg:grid-cols-2">
+            <Reveal>
+              <a href={bookHref} className="group flex h-full flex-col justify-between rounded-[28px] bg-white p-8 text-[#071528] transition hover:-translate-y-1">
+                <div>
+                  <p className="text-[10px] font-bold tracking-[0.2em] text-black/40">OPTION 1 · 20-MINUTE VIDEO CALL</p>
+                  <h3 className="mt-4 text-3xl font-medium tracking-[-0.04em]">Book a free Growth Call</h3>
+                  <p className="mt-4 text-base leading-7 text-black/60">
+                    We review your business before the call, then show you live what to fix first. You leave with a
+                    plan and a fixed price.
+                  </p>
+                </div>
+                <span className="mt-8 inline-flex w-fit items-center gap-3 rounded-full bg-[#071528] px-6 py-4 text-[10px] font-bold tracking-[0.14em] text-white">
+                  CHOOSE A TIME <span aria-hidden className="transition group-hover:translate-x-1">→</span>
+                </span>
+              </a>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <a href={auditHref} className="group flex h-full flex-col justify-between rounded-[28px] border border-white/15 bg-white/[0.04] p-8 transition hover:-translate-y-1 hover:bg-white/[0.07]">
+                <div>
+                  <p className="text-[10px] font-bold tracking-[0.2em] text-white/45">OPTION 2 · BY EMAIL, NO CALL NEEDED</p>
+                  <h3 className="mt-4 text-3xl font-medium tracking-[-0.04em]">Get a free audit report</h3>
+                  <p className="mt-4 text-base leading-7 text-white/65">
+                    Send us your website. Within about 2 working days you get a written report: mobile experience,
+                    booking path, Google profile vs competitors, and your top 3 fixes.
+                  </p>
+                </div>
+                <span className="mt-8 inline-flex w-fit items-center gap-3 rounded-full bg-[#16b886] px-6 py-4 text-[10px] font-bold tracking-[0.14em] text-[#071528]">
+                  REQUEST MY REPORT <span aria-hidden className="transition group-hover:translate-x-1">→</span>
+                </span>
+              </a>
+            </Reveal>
           </div>
         </div>
       </section>

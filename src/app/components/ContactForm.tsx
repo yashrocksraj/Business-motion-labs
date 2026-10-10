@@ -72,7 +72,7 @@ export default function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, formType: "Website enquiry" }),
       });
 
       const result = await response.json();
@@ -129,18 +129,18 @@ export default function ContactForm() {
           {/* LEFT SIDE */}
           <div>
             <p className="text-[10px] font-bold tracking-[0.25em] text-black/30">
-              FREE WEBSITE AUDIT
+              CONTACT US
             </p>
 
             <h2 className="mt-7 max-w-xl text-5xl font-medium leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
-              Send us your website.{" "}
-              <span className="text-black/20">We&apos;ll tell you what to fix.</span>
+              Have a question?{" "}
+              <span className="text-black/20">Talk to us.</span>
             </h2>
 
             <p className="mt-8 max-w-md text-base leading-7 text-black/50">
-              We check it the way a new customer would: on Google, on a phone,
-              and when they try to book, order or call. You get a short report
-              with the three things to fix first. Free, no obligation.
+              Projects, partnerships or anything else: tell us what you need
+              and the right person will get back to you within one working
+              day.
             </p>
 
             <div className="mt-12 space-y-5 border-t border-black/10 pt-8">
@@ -379,7 +379,7 @@ export default function ContactForm() {
                 >
                   {isSubmitting
                     ? "Sending Inquiry..."
-                    : "Send for a free audit"}
+                    : "Send message"}
                 </button>
 
                 <p className="text-center text-[10px] leading-5 text-black/35">
