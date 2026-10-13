@@ -495,3 +495,91 @@ export const ROLES = [
     needs: ["Curious and quick to learn", "Good English", "Final-year students and recent graduates welcome"],
   },
 ];
+
+/* ============================ PAYMENTS ============================
+ * Used by /pay (a page you send to clients after the Growth Call).
+ * Paste links from YOUR OWN payment accounts here. Anything left ""
+ * falls back to "email us for an invoice", so the page always works.
+ */
+export const PAYMENT = {
+  /** PayPal.me base link, e.g. "https://paypal.me/businessmotionlabs".
+   *  The page adds the amount, e.g. .../750USD. Card + PayPal balance. */
+  paypalMe: "",
+  /** Optional: a fixed bank-transfer payment page (Skydo / Razorpay / Wise).
+   *  Leave "" and clients request an ACH invoice by email instead. */
+  bankLink: "",
+  /** Share of the setup fee paid to start. The rest is due at launch. */
+  depositShare: 0.5,
+};
+
+export type Package = {
+  id: string;
+  name: string;
+  setup: number;
+  monthly: number;
+  bestFor: string;
+  popular?: boolean;
+  setupIncludes: string[];
+  monthlyIncludes: string[];
+};
+
+/** Prices in US dollars. Edit freely: the /pay page updates itself. */
+export const PACKAGES: Package[] = [
+  {
+    id: "launch",
+    name: "Launch",
+    setup: 1200,
+    monthly: 99,
+    bestFor: "Businesses with no website, or one that is badly out of date.",
+    setupIncludes: [
+      "Mobile-first website, up to 5 pages",
+      "Book, call or order button at the top of every page",
+      "Google Business Profile cleaned up and linked to the site",
+      "Basic SEO and Google Search Console set up",
+      "Contact form with an instant email reply",
+    ],
+    monthlyIncludes: ["Hosting, security and backups", "Up to 1 hour of changes a month", "Uptime monitoring"],
+  },
+  {
+    id: "growth",
+    name: "Growth",
+    setup: 1500,
+    monthly: 249,
+    popular: true,
+    bestFor: "Businesses that want more bookings from people who already find them.",
+    setupIncludes: [
+      "Everything in Launch, up to 8 pages",
+      "A page for each main service",
+      "Online booking or ordering connected to the tool you use",
+      "Automatic reply to every enquiry",
+      "Automatic review requests after each visit",
+      "Google Analytics 4 tracking of calls, bookings and forms",
+    ],
+    monthlyIncludes: [
+      "Everything in the Launch plan",
+      "4 Google Business Profile posts a month",
+      "Monthly report: visits, enquiries, bookings, reviews",
+      "Up to 2 hours of changes a month",
+    ],
+  },
+  {
+    id: "dominate",
+    name: "Dominate",
+    setup: 2500,
+    monthly: 499,
+    bestFor: "Busy businesses competing hard in their area.",
+    setupIncludes: [
+      "Everything in Growth, up to 15 pages",
+      "Pages for the nearby areas you serve",
+      "Follow-up messages for missed enquiries and repeat bookings",
+      "Competitor tracking set up",
+    ],
+    monthlyIncludes: [
+      "Everything in the Growth plan",
+      "2 new pages or articles a month",
+      "Replies to your Google reviews",
+      "30-minute strategy call every month",
+      "Priority support",
+    ],
+  },
+];
